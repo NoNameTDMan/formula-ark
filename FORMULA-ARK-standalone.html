@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080e1d">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="数式を構築し、整数最適化で生産する。オフラインで遊べる数式設計ゲーム。">
+  
+  <link rel="icon" type="image/png" href="data:image/png;base64,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">
+  
+  <style>
+:root{--bg:#080e1d;--panel:#111b30;--panel-hi:#16233a;--panel-deep:#0d1629;--ink:#edf3ff;--muted:#8d9cba;--faint:#60708f;--line:rgba(176,196,239,.12);--gold:#f3c789;--gold-strong:#ffdfaa;--blue:#8abcfb;--mint:#8de0d4;--rose:#f5a4aa;--violet:#c7aeff;--radius:20px;--shadow:0 24px 80px rgba(0,0,0,.24)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100svh;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,system-ui,sans-serif;font-size:14px;-webkit-font-smoothing:antialiased}button,input{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.44}button,a{-webkit-tap-highlight-color:transparent}button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-offset:3px}::selection{background:rgba(243,199,137,.3)}.ambient{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:-1;background:radial-gradient(ellipse at 73% 6%,rgba(64,92,158,.14),transparent 42%),radial-gradient(ellipse at 15% 50%,rgba(56,83,122,.13),transparent 55%)}.ambient span{position:absolute;border-radius:50%;filter:blur(80px);opacity:.17}.ambient span:nth-child(1){width:350px;height:350px;background:#335ab7;top:10%;right:-100px}.ambient span:nth-child(2){width:280px;height:280px;background:#ac8457;bottom:10%;left:2%}.ambient span:nth-child(3){width:170px;height:170px;background:#44c9c8;bottom:20%;right:18%}
+.shell{max-width:1490px;margin:0 auto}.topbar{height:88px;padding:0 38px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);background:rgba(8,14,29,.7);backdrop-filter:blur(16px);position:sticky;top:0;z-index:20}.brand{display:flex;align-items:center;gap:12px}.brand-symbol{width:43px;height:43px;display:grid;place-items:center;color:var(--gold)}.brand-symbol svg{width:43px;height:43px}.brand-copy{display:flex;flex-direction:column;gap:4px}.brand-copy strong{font-size:21px;letter-spacing:.16em;font-weight:750;line-height:1}.brand-copy strong span{color:var(--gold)}.brand-copy small{font-size:9px;font-weight:700;letter-spacing:.18em;color:var(--faint)}.topbar-right{display:flex;gap:22px;align-items:center}.ver{font-size:10px;font-weight:800;color:var(--gold);letter-spacing:.14em;border:1px solid rgba(243,199,137,.25);border-radius:8px;padding:7px 10px}.ver span{color:var(--muted)}.sync-status{display:flex;align-items:center;gap:7px;font-size:10px;letter-spacing:.12em;font-weight:800;color:var(--muted)}.sync-led{width:6px;height:6px;border-radius:100%;background:var(--mint);box-shadow:0 0 12px rgba(141,224,212,.7)}
+.layout{display:grid;grid-template-columns:220px minmax(0,1fr);min-height:calc(100svh - 88px)}.sidebar{border-right:1px solid var(--line);padding:32px 15px;position:sticky;top:88px;height:calc(100svh - 88px)}.side-caption{margin:0 12px 17px;font-size:10px;letter-spacing:.16em;color:var(--faint);font-weight:800}.side-link{display:flex;align-items:center;gap:14px;border:1px solid transparent;background:transparent;color:var(--muted);width:100%;text-align:left;border-radius:12px;padding:15px 13px;margin-bottom:6px;font-weight:650;transition:background .2s,color .2s}.side-link svg{width:19px;height:19px}.side-link.active{border-color:rgba(243,199,137,.14);color:var(--gold);background:linear-gradient(90deg,rgba(243,199,137,.11),rgba(243,199,137,.025))}.side-link:not(.active):hover{background:rgba(255,255,255,.04);color:var(--ink)}.side-footer{position:absolute;bottom:30px;left:26px;right:22px;color:var(--faint);font-size:11px;line-height:1.85}.bottom-nav{display:none}.main{min-width:0;padding:34px 35px 100px;max-width:1250px;width:100%}.loading-message{padding:80px 0;color:var(--muted);text-align:center}
+.eyebrow{color:var(--gold);font-size:10px;font-weight:800;letter-spacing:.19em;text-transform:uppercase}.page-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin:0 0 25px}.page-head h1{font-size:clamp(25px,3vw,34px);font-weight:750;letter-spacing:.03em;margin:8px 0 0}.page-head p{margin:9px 0 0;color:var(--muted);font-size:13px;line-height:1.7}.page-head .head-aside{text-align:right}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-variant-numeric:tabular-nums}.tiny{font-size:11px}.small{font-size:12px}.muted{color:var(--muted)}.faint{color:var(--faint)}.gold{color:var(--gold)}.blue{color:var(--blue)}.mint{color:var(--mint)}.rose{color:var(--rose)}.right{text-align:right}.label{color:var(--muted);font-size:11px;letter-spacing:.08em}.caption{color:var(--muted);font-size:12px;line-height:1.75}.section-title{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:29px 0 15px}.section-title h2{font-size:16px;letter-spacing:.035em;font-weight:720;margin:0}.section-title .index{color:var(--gold);font-size:10px;font-family:ui-monospace,monospace;letter-spacing:.1em}.section-title>small{color:var(--muted);font-size:11px}.flex{display:flex}.between{justify-content:space-between}.center{align-items:center}.gap8{gap:8px}.gap12{gap:12px}.wrap{flex-wrap:wrap}.divider{height:1px;background:var(--line);margin:16px 0}.pill{display:inline-flex;align-items:center;gap:6px;border-radius:100px;padding:5px 10px;border:1px solid rgba(243,199,137,.2);font-weight:700;font-size:10px;color:var(--gold);letter-spacing:.07em}.pill.cool{color:var(--blue);border-color:rgba(138,188,251,.24)}.pill.good{color:var(--mint);border-color:rgba(141,224,212,.25)}.pill.warn{color:var(--rose);border-color:rgba(245,164,170,.25)}
+.panel{background:linear-gradient(150deg,rgba(25,38,63,.92),rgba(15,25,43,.92));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}.panel-inner{padding:22px}.panel-title{margin:0;font-size:14px;font-weight:720;letter-spacing:.03em}.panel-sub{color:var(--muted);font-size:11px;line-height:1.6;margin-top:6px}.split{display:grid;grid-template-columns:1.17fr 1fr;gap:16px}.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.stat-card{padding:20px 23px}.stat-card .stat-value{font-size:clamp(25px,3vw,35px);font-weight:750;letter-spacing:-.035em;line-height:1.22;margin:12px 0 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.stat-hero{font-size:26px;font-weight:750;line-height:1.3;letter-spacing:-.02em}.stat-card .rate{font-size:12px;color:var(--mint);font-weight:700}.stat-card .rate.data{color:var(--blue)}
+.hero{min-height:276px;display:flex;position:relative;isolation:isolate;background:radial-gradient(circle at 75% 53%,rgba(88,109,167,.27),transparent 42%),linear-gradient(119deg,#19233d 0%,#111b30 75%);overflow:hidden}.hero:before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle,#c9d5ee 1px,transparent 1.3px);background-size:35px 42px;opacity:.09;mask-image:linear-gradient(to right,transparent,black)}.hero-content{padding:31px 30px;position:relative;z-index:2;max-width:62%;display:flex;flex-direction:column;align-items:flex-start}.hero h1{font-size:clamp(24px,2.7vw,35px);line-height:1.36;letter-spacing:.02em;margin:14px 0 10px;font-weight:740}.hero h1 span{color:var(--gold)}.hero p{font-size:12px;color:#afbfdd;line-height:1.9;margin:0 0 17px}.orbit{position:absolute;width:310px;height:310px;right:8px;top:-8px;display:grid;place-items:center;opacity:.96}.orbit-ring{border:1px solid rgba(172,197,243,.17);border-radius:50%;position:absolute;animation:orbitturn 35s linear infinite}.orbit-ring.r1{width:275px;height:275px;transform:rotate(-28deg);border-style:dashed}.orbit-ring.r2{width:218px;height:218px;border-color:rgba(243,199,137,.2);animation-duration:24s;animation-direction:reverse}.orbit-ring.r3{width:154px;height:154px;border-color:rgba(172,197,243,.18)}.orbit-ring.r2:before,.orbit-ring.r1:after{content:"";position:absolute;width:7px;height:7px;border-radius:50%;background:var(--gold);top:18px;left:29px;box-shadow:0 0 20px rgba(243,199,137,.9)}.orbit-core{height:96px;width:96px;display:grid;place-items:center;border-radius:23px;border:1px solid rgba(243,199,137,.32);background:radial-gradient(circle at 30% 24%,rgba(243,199,137,.21),rgba(15,25,43,.93));transform:rotate(45deg);box-shadow:0 0 85px rgba(243,199,137,.13),inset 0 0 40px rgba(243,199,137,.05)}.orbit-core b{transform:rotate(-45deg);font-size:37px;color:var(--gold);font-weight:400;font-family:Georgia,serif}.orbit-small{position:absolute;bottom:56px;right:21px;color:rgba(198,218,250,.35);font-size:9px;letter-spacing:.22em}.hero-button{color:#101829!important;background:linear-gradient(110deg,#efc080,#ffdfa5)!important;border:0!important;font-weight:800!important}.hero-button:hover{filter:brightness(1.07)}@keyframes orbitturn{to{transform:rotate(360deg)}}
+.btn{border:1px solid rgba(185,201,230,.2);background:rgba(255,255,255,.035);border-radius:10px;color:var(--ink);font-size:12px;font-weight:680;padding:11px 15px;min-height:42px;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.18s background,.18s transform,.18s border-color}.btn:hover:not(:disabled){background:rgba(255,255,255,.08);border-color:rgba(243,199,137,.35);transform:translateY(-1px)}.btn:active{transform:translateY(0)}.btn.primary{background:linear-gradient(110deg,#e6b777,#f6d49e);color:#11192a;border-color:transparent}.btn.primary:hover{background:#ffe0aa}.btn.soft{background:rgba(243,199,137,.1);color:var(--gold);border-color:rgba(243,199,137,.26)}.btn.danger{color:var(--rose);border-color:rgba(245,164,170,.3)}.btn.sm{min-height:34px;padding:7px 11px;font-size:11px}.btn.full{width:100%}.btn-icon{width:16px;height:16px;stroke:currentColor;flex:none}.btn .btn-icon{width:15px;height:15px}.mini-action{border:0;background:transparent;color:var(--gold);font-size:11px;font-weight:700;cursor:pointer;padding:4px}.mini-action:hover{text-decoration:underline}.tick-progress{background:rgba(255,255,255,.07);height:4px;border-radius:100px;overflow:hidden}.tick-progress>div{height:100%;width:0;background:linear-gradient(to right,var(--mint),var(--gold));transition:width .12s linear}.contract{padding:23px 24px}.contract-header{display:flex;gap:14px;align-items:flex-start;justify-content:space-between}.mission-step{color:var(--gold);font-weight:800;font-size:10px;letter-spacing:.14em}.mission-title{font-size:20px;font-weight:750;margin:8px 0 8px}.mission-desc{color:var(--muted);font-size:12px;line-height:1.7}.progress-row{display:grid;grid-template-columns:55px 1fr auto;align-items:center;gap:10px;margin:13px 0 8px}.progress-row .progress-name{font-size:11px;color:var(--muted)}.progress-track{height:8px;border-radius:20px;background:rgba(180,202,255,.095);overflow:hidden}.progress-fill{display:block;background:linear-gradient(90deg,#af7b49,var(--gold));height:100%;border-radius:inherit;transition:width .25s}.progress-fill.bluefill{background:linear-gradient(90deg,#557bb9,var(--blue))}.progress-value{font-size:11px;color:var(--ink);font-weight:650;font-variant-numeric:tabular-nums;min-width:62px;text-align:right}.contract-claim{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-top:20px;padding-top:18px;border-top:1px solid var(--line)}.contract-claim .rewards{font-size:11px;color:var(--muted);line-height:1.65}.contract-done{background:rgba(141,224,212,.07);border:1px solid rgba(141,224,212,.22);padding:11px 13px;color:var(--mint);border-radius:11px;font-size:12px;line-height:1.6}.explanation{padding:14px 16px;background:rgba(243,199,137,.065);border:1px solid rgba(243,199,137,.14);border-radius:12px;color:#e0cda9;font-size:12px;line-height:1.75}.explanation .title{color:var(--gold);font-weight:800;font-size:11px;margin-bottom:6px}
+.budget{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}.budget-chip{padding:14px;border:1px solid var(--line);border-radius:13px;background:rgba(7,13,24,.26)}.budget-chip .big{display:flex;justify-content:space-between;align-items:center;margin:11px 0 9px;font-size:19px;font-weight:750}.budget-chip .big small{font-size:11px;color:var(--muted);font-weight:400}.small-track{height:5px;background:rgba(255,255,255,.09);border-radius:8px;overflow:hidden}.small-track b{display:block;height:100%;border-radius:8px;background:var(--blue)}.budget-chip:nth-child(2) .small-track b{background:var(--gold)}.plan-headline{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px;gap:10px}.score{color:var(--gold);font-size:21px;font-weight:800}.plan-list{margin-top:14px}.plan-line{display:grid;grid-template-columns:minmax(0,1fr) minmax(55px,.6fr) 50px;gap:11px;align-items:center;padding:10px 0;border-bottom:1px solid rgba(197,211,242,.075)}.plan-line:last-child{border:0}.plan-line .formula-name{font-size:12px;font-weight:680;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.plan-line .formula-sub{font-size:10px;color:var(--faint);margin-top:3px}.planbar{height:6px;border-radius:20px;background:rgba(255,255,255,.085);overflow:hidden}.planbar b{display:block;height:100%;background:var(--bar-color,var(--gold));border-radius:inherit}.plan-num{text-align:right;font-size:13px;font-weight:800}.opt-badge{display:flex;gap:6px;align-items:center;font-size:10px;color:var(--mint);font-weight:800;letter-spacing:.09em}.opt-badge:before{content:"";width:6px;height:6px;background:var(--mint);border-radius:50%;box-shadow:0 0 10px rgba(141,224,212,.5)}.weight-tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:13px 0}.weight-chip{padding:11px 6px;text-align:center;border-radius:9px;background:rgba(255,255,255,.025);border:1px solid var(--line);color:var(--muted);font-size:11px;font-weight:700;min-height:44px}.weight-chip.active{color:var(--gold);background:rgba(243,199,137,.11);border-color:rgba(243,199,137,.38)}.weight-chip small{display:block;font-size:9px;margin-top:3px;opacity:.7}.hint{margin-top:14px;color:var(--muted);font-size:12px;line-height:1.8}.chart-box{height:94px;padding:2px 0 0}.chart-svg{width:100%;height:100%}.history-labels{display:flex;justify-content:space-between;color:var(--faint);font-size:10px;margin-top:4px}.margin-line{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}.margin-stat{border:1px solid var(--line);background:rgba(7,13,24,.25);border-radius:12px;padding:14px}.margin-stat strong{font-size:23px;display:block;margin:5px 0;color:var(--gold)}
+.formula-layout{display:grid;grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr);gap:18px;align-items:start}.formula-list{display:grid;gap:9px}.formula-choice{position:relative;display:flex;align-items:center;gap:13px;width:100%;text-align:left;border-radius:15px;border:1px solid var(--line);background:linear-gradient(120deg,rgba(24,38,63,.75),rgba(15,24,43,.85));color:var(--ink);padding:13px 14px;min-height:79px}.formula-choice.active{border-color:rgba(243,199,137,.53);box-shadow:inset 0 0 25px rgba(243,199,137,.045)}.formula-choice.locked{opacity:.46}.formula-sigil{width:49px;height:49px;border-radius:13px;display:grid;place-items:center;background:var(--sigil-bg);font-size:29px;flex:none;color:var(--sigil-color);font-family:Georgia,serif;border:1px solid rgba(255,255,255,.06)}.formula-choice .choice-name{font-size:14px;font-weight:750}.formula-choice .choice-en{font-size:9px;color:var(--faint);margin-top:4px;letter-spacing:.13em}.formula-choice .choice-stat{margin-left:auto;text-align:right}.formula-choice .choice-stat strong{font-size:17px;color:var(--gold)}.formula-choice .choice-stat small{display:block;color:var(--muted);font-size:10px}.editor-top{padding:22px 23px 16px;background:radial-gradient(circle at 90% 0%,rgba(243,199,137,.07),transparent 50%)}.editor-head{display:flex;gap:14px;align-items:center}.editor-sigil{width:62px;height:62px;border-radius:17px;display:grid;place-items:center;background:var(--sigil-bg);color:var(--sigil-color);font-family:Georgia,serif;font-size:36px;border:1px solid rgba(255,255,255,.08)}.editor-head h2{font-size:21px;margin:5px 0 4px}.equation{margin:17px 0 0;padding:14px 10px;border-radius:12px;background:rgba(7,14,26,.55);border:1px solid rgba(181,203,245,.1);font:15px/1.8 ui-monospace,SFMono-Regular,Consolas,monospace;text-align:center;overflow-wrap:anywhere;color:#dae6fc}.equation span{color:var(--gold)}.formula-editor{padding:19px 22px 23px}.min-control{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0}.stepper{display:flex;align-items:center;gap:6px;background:rgba(5,10,22,.44);border-radius:11px;border:1px solid var(--line);padding:4px}.stepper button{border:0;background:rgba(255,255,255,.07);height:34px;width:34px;border-radius:7px;color:var(--ink);font-size:18px}.stepper button:hover{background:rgba(243,199,137,.15)}.stepper strong{display:block;min-width:33px;text-align:center}.metrics-table{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:12px 0 16px}.metric{background:rgba(7,14,26,.36);border:1px solid var(--line);border-radius:11px;padding:11px 13px}.metric span{display:block;color:var(--muted);font-size:10px;margin-bottom:6px}.metric strong{font-size:17px}.chip-slots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:14px}.slot{border:1px dashed rgba(243,199,137,.28);min-height:81px;background:rgba(243,199,137,.03);border-radius:12px;color:var(--gold);padding:9px;text-align:center;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;font-size:11px;font-weight:700}.slot.filled{border-style:solid;background:rgba(243,199,137,.09)}.slot.locked{opacity:.3;border-color:var(--line);pointer-events:none}.slot .slot-label{color:var(--faint);font-size:9px}.inventory{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.chip-item{min-height:102px;text-align:left;border-radius:12px;border:1px solid var(--line);padding:13px;background:rgba(10,20,34,.45);color:var(--ink)}.chip-item:hover:not(:disabled){border-color:rgba(243,199,137,.35);background:rgba(243,199,137,.05)}.chip-item .chip-head{display:flex;align-items:flex-start;justify-content:space-between;gap:4px}.chip-item strong{font-size:12px;line-height:1.4}.chip-item .symbol{font:17px ui-monospace,monospace;color:var(--gold);margin-bottom:7px}.chip-item .description{color:var(--muted);font-size:10px;line-height:1.5;margin-top:5px}.chip-qty{color:var(--mint);font-size:10px;white-space:nowrap}.chip-item.unowned{opacity:.35}.formula-how{margin-top:19px}.formula-how p{line-height:1.8;margin:6px 0;color:var(--muted);font-size:12px}
+.research-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.research-card{padding:20px;display:flex;flex-direction:column;gap:11px}.research-header{display:flex;align-items:center;justify-content:space-between}.research-icon{font-size:23px;color:var(--gold)}.research-lvl{font-size:11px;color:var(--muted)}.research-card h3{font-size:16px;margin:0}.research-card p{color:var(--muted);font-size:12px;line-height:1.7;margin:0;min-height:38px}.research-card .bottom{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:auto}.price{font-size:12px;color:var(--gold);font-weight:720;line-height:1.8}.price .data{color:var(--blue)}.trial-list{display:grid;gap:12px}.trial-card{padding:18px 21px}.trial-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.trial-card h3{font-size:15px;margin:6px 0}.trial-body{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;margin-top:14px}.trial-values{display:flex;flex-wrap:wrap;gap:7px}.trial-values span{border:1px solid var(--line);background:rgba(7,14,25,.35);border-radius:7px;padding:7px 9px;font-size:11px;color:var(--muted)}.trial-values b{color:var(--ink)}
+.archive-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.archive-stat{padding:23px}.archive-stat strong{display:block;font-size:26px;color:var(--gold);margin-top:9px}.achievements{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.achievement{border:1px solid var(--line);border-radius:12px;padding:14px;min-height:119px;background:rgba(255,255,255,.02)}.achievement.earned{background:rgba(243,199,137,.065);border-color:rgba(243,199,137,.2)}.achievement .ach-symbol{font-size:20px;color:var(--gold);margin-bottom:8px}.achievement:not(.earned) .ach-symbol{color:var(--faint)}.achievement strong{font-size:12px;display:block}.achievement p{font-size:10px;color:var(--muted);line-height:1.5;margin:5px 0 0}.activity{list-style:none;margin:0;padding:0}.activity li{display:flex;gap:13px;padding:13px 0;border-bottom:1px solid var(--line);font-size:12px;color:var(--muted);line-height:1.65}.activity li:last-child{border-bottom:0}.activity li:before{content:'◈';color:var(--gold);font-size:12px}.guide{padding:21px 23px}.guide-step{display:flex;align-items:flex-start;gap:13px;padding:13px 0;border-bottom:1px solid var(--line)}.guide-step:last-child{border:0}.guide-number{width:28px;height:28px;display:grid;place-items:center;border-radius:9px;background:rgba(243,199,137,.12);color:var(--gold);font-weight:800;flex:none}.guide-step strong{font-size:13px}.guide-step p{color:var(--muted);font-size:11px;line-height:1.75;margin:4px 0 0}.danger-zone{padding:20px;border:1px solid rgba(245,164,170,.18);border-radius:15px;background:rgba(245,164,170,.03)}.danger-zone p{color:var(--muted);font-size:12px;line-height:1.6;margin:7px 0 15px}.footer-note{color:var(--faint);font-size:11px;line-height:1.8;margin-top:30px;text-align:center}
+.toast-stack{position:fixed;bottom:22px;right:25px;z-index:60;display:grid;gap:8px;pointer-events:none}.toast{background:#24354a;border:1px solid rgba(243,199,137,.35);padding:14px 18px;color:var(--ink);border-radius:12px;box-shadow:0 12px 50px #0009;font-size:12px;line-height:1.7;max-width:360px;animation:toastIn .2s ease both}.toast.success{border-color:rgba(141,224,212,.35)}.toast.error{border-color:rgba(245,164,170,.45)}@keyframes toastIn{from{transform:translateY(10px);opacity:0}to{transform:translateY(0);opacity:1}}.overlay{position:fixed;inset:0;z-index:80;background:rgba(2,6,15,.72);backdrop-filter:blur(7px);display:flex;align-items:center;justify-content:center;padding:20px}.modal{width:min(550px,100%);max-height:min(85svh,750px);overflow:auto;background:#172238;border:1px solid rgba(243,199,137,.2);border-radius:20px;padding:23px;box-shadow:0 30px 150px #000a}.modal-header{display:flex;justify-content:space-between;align-items:center;gap:12px}.modal h2{margin:8px 0 8px;font-size:21px}.modal-close{height:36px;width:36px;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--ink);font-size:19px}.modal-chip-list{display:grid;gap:9px;margin:19px 0}.modal-chip{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:11px;padding:13px;color:var(--ink);text-align:left}.modal-chip:hover:not(:disabled){background:rgba(243,199,137,.09)}.modal-chip b{display:block;font-size:13px}.modal-chip p{font-size:11px;color:var(--muted);margin:5px 0 0;line-height:1.6}.modal-chip .chip-mark{font-size:18px;color:var(--gold);min-width:44px;text-align:right}.tutorial-cta{display:flex;gap:10px;margin-top:15px;flex-wrap:wrap}.trial-result{padding:12px;background:rgba(141,224,212,.08);border:1px solid rgba(141,224,212,.18);border-radius:11px;color:var(--mint);margin:13px 0;font-size:12px}
+@media(min-width:1260px){.main{padding-left:48px;padding-right:48px}.hero{min-height:289px}.orbit{right:35px}.panel-inner{padding:24px}}
+@media(max-width:1050px){.layout{grid-template-columns:72px minmax(0,1fr)}.sidebar{padding:24px 9px}.side-caption,.side-footer,.side-link span{display:none}.side-link{justify-content:center;padding:14px 0;gap:0}.main{padding:28px 24px 100px}.topbar{padding:0 24px}.orbit{right:-35px}.split{grid-template-columns:1fr 1fr}}
+@media(max-width:740px){.topbar{height:67px;padding:0 16px}.brand-symbol,.brand-symbol svg{width:36px;height:36px}.brand{gap:8px}.brand-copy strong{font-size:17px;letter-spacing:.13em}.brand-copy small{font-size:7px;letter-spacing:.1em}.topbar-right{gap:9px}.sync-status{display:none}.ver{font-size:9px;padding:5px 7px}.layout{display:block;min-height:calc(100svh - 67px)}.sidebar{display:none}.main{padding:23px 14px calc(116px + env(safe-area-inset-bottom,0px))}.bottom-nav{display:grid;grid-template-columns:repeat(4,1fr);position:fixed;bottom:0;left:0;right:0;z-index:40;height:calc(69px + env(safe-area-inset-bottom,0px));padding:6px 7px env(safe-area-inset-bottom,0px);border-top:1px solid rgba(180,203,245,.14);background:rgba(10,17,33,.95);backdrop-filter:blur(22px)}.bottom-link{border:0;border-radius:10px;background:transparent;color:var(--muted);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:10px;font-weight:700}.bottom-link.active{color:var(--gold);background:rgba(243,199,137,.08)}.bottom-link svg{height:21px;width:21px}.page-head{margin-bottom:18px}.page-head h1{font-size:26px}.page-head .head-aside{display:none}.hero{min-height:240px}.hero-content{padding:24px 21px;max-width:72%}.hero h1{font-size:24px}.hero p{font-size:11px}.orbit{width:250px;height:250px;right:-102px;top:3px;opacity:.7}.orbit-ring.r1{width:230px;height:230px}.orbit-ring.r2{width:177px;height:177px}.orbit-ring.r3{width:125px;height:125px}.orbit-core{height:76px;width:76px}.orbit-small{display:none}.split{grid-template-columns:1fr}.section-title{margin:24px 0 12px}.stat-card{padding:16px}.stat-card .stat-value{font-size:27px}.panel-inner{padding:19px}.formula-layout{grid-template-columns:1fr}.formula-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.formula-choice{padding:10px;gap:8px;min-height:70px}.formula-sigil{height:38px;width:38px;font-size:22px}.formula-choice .choice-name{font-size:12px}.formula-choice .choice-en{font-size:7px}.formula-choice .choice-stat{display:none}.research-grid{grid-template-columns:1fr}.achievements{grid-template-columns:repeat(2,minmax(0,1fr))}.archive-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.archive-stat{padding:14px 10px}.archive-stat strong{font-size:19px}.trial-body{grid-template-columns:1fr}.trial-body .btn{width:100%}.toast-stack{left:13px;right:13px;bottom:calc(83px + env(safe-area-inset-bottom,0px))}.toast{max-width:100%}}
+@media(max-width:370px){.main{padding-left:10px;padding-right:10px}.hero-content{max-width:78%}.hero h1{font-size:21px}.stat-card .stat-value{font-size:23px}.weight-tabs{gap:3px}.weight-chip{font-size:10px;padding:9px 3px}.formula-choice{gap:6px}.formula-choice .choice-en{font-size:6.5px}.chip-slots{gap:5px}.slot{padding:7px 3px;font-size:10px}.inventory{grid-template-columns:1fr 1fr}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
+
+</style>
+  <title>FORMULA / ARK — 数式航路</title>
+</head>
+<body>
+  <div class="ambient" aria-hidden="true"><span></span><span></span><span></span></div>
+  <div id="app" class="shell">
+    <header class="topbar">
+      <div class="brand" aria-label="FORMULA ARK 数式航路">
+        <div class="brand-symbol"><svg viewBox="0 0 44 44" fill="none" aria-hidden="true"><path d="M22 4 40 22 22 40 4 22 22 4Z" stroke="currentColor" stroke-width="1.7"/><path d="M22 10 34 22 22 34 10 22 22 10Z" stroke="currentColor" stroke-opacity=".52"/><path d="M22 16v12M16 22h12" stroke="currentColor" stroke-width="1.6"/></svg></div>
+        <div class="brand-copy"><strong>FORMULA<span> / </span>ARK</strong><small>数式航路 — THE EQUATION ENGINE</small></div>
+      </div>
+      <div class="topbar-right"><span class="ver">BETA <span>0.9.0</span></span><span class="sync-status"><span class="sync-led"></span>LOCAL SAVE</span></div>
+    </header>
+    <div class="layout">
+      <nav class="sidebar" id="side-nav" aria-label="メインメニュー"></nav>
+      <main class="main" id="view" tabindex="-1"><div class="loading-message">航路を解析しています…</div></main>
+    </div>
+    <nav class="bottom-nav" id="bottom-nav" aria-label="モバイルメニュー"></nav>
+  </div>
+  <div id="toast-stack" class="toast-stack" aria-live="polite" aria-atomic="false"></div>
+  <div id="overlay-root"></div>
+  <script>
+/* FORMULA / ARK — deterministic, offline-first optimization game engine.
+   MIT license. Pure functions; no DOM, timers or storage in this module. */
+(function (root, factory) {
+  const api = factory();
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+  root.FormulaCore = api;
+})(typeof globalThis !== 'undefined' ? globalThis : this, function () {
+  'use strict';
+  const SAVE_VERSION = 3;
+  const CYCLE_MS = 4000;
+  const MAX_OFFLINE_CYCLES = 180;
+  const MAX_UPGRADE_LEVEL = 22;
+  const MAX_CURRENCY = 1e15;
+  const FORMULAS = [
+    { id:'helios', no:'01', name:'光子圧縮', en:'PHOTON PRESS', sigil:'◈', color:'#e9ae6b', matter:2, energy:2, light:7, data:0, cap:7, unlock:0, about:'少ない電力で光量を安定生産する基礎式。'},
+    { id:'oracle', no:'02', name:'観測演算', en:'OBSERVATORY', sigil:'⌁', color:'#8dbcf9', matter:1, energy:3, light:1, data:4, cap:7, unlock:0, about:'観測値を知識へと変換する。研究の主力。'},
+    { id:'prism', no:'03', name:'光学合成', en:'PRISM ARRAY', sigil:'◇', color:'#c7a7ff', matter:3, energy:4, light:10, data:3, cap:6, unlock:1, about:'光量と知識の両方を出力する複合式。'},
+    { id:'inverse', no:'04', name:'反転導出', en:'INVERSE ENGINE', sigil:'⌬', color:'#77e2cf', matter:2, energy:4, light:2, data:8, cap:6, unlock:2, about:'知識を高密度で取り出す強力な演算。'},
+    { id:'vector', no:'05', name:'位相増幅', en:'PHASE VECTOR', sigil:'✧', color:'#f29aaa', matter:4, energy:5, light:23, data:1, cap:5, unlock:3, about:'大量の光量を生成する高負荷の演算式。'},
+    { id:'zero', no:'06', name:'零点炉', en:'ZERO-POINT CORE', sigil:'✳', color:'#d8ce8c', matter:5, energy:7, light:32, data:9, cap:5, unlock:4, about:'生産を次元上昇させる精密な複合式。'},
+    { id:'recursion', no:'07', name:'自己再帰', en:'RECURSIVE ARRAY', sigil:'∞', color:'#91a8ff', matter:6, energy:9, light:62, data:14, cap:5, unlock:5, about:'巨大な生産量を生む最終世代の数式。'}
+  ];
+  const CHIPS = [
+    { id:'light', name:'加算子 +4', tag:'光量', symbol:'+4', color:'gold', desc:'1稼働あたり光量+4。電力消費+1。', dL:4, dE:1 },
+    { id:'data', name:'演繹子 +3', tag:'知識', symbol:'+3', color:'blue', desc:'1稼働あたり知識+3。物質消費+1。', dD:3, dM:1 },
+    { id:'eco', name:'省電演算', tag:'節約', symbol:'E−1', color:'mint', desc:'1稼働あたり電力消費−1（下限1）。', dE:-1 },
+    { id:'seed', name:'定数項 +12', tag:'初動', symbol:'+12', color:'gold', desc:'その式を1回以上稼働させると光量+12。', bL:12 },
+    { id:'parallel', name:'並列化 +3', tag:'容量', symbol:'×+3', color:'violet', desc:'1周期の最大稼働回数+3。', dCap:3 },
+    { id:'proof', name:'証明の余白', tag:'初動', symbol:'Σ+9', color:'blue', desc:'その式を1回以上稼働させると知識+9。', bD:9 },
+    { id:'amplify', name:'過給演算 ×1.6', tag:'増幅', symbol:'×1.6', color:'rose', desc:'出力を1.6倍（切り捨て）。物質+1、電力+2。', mult:1.6, dM:1, dE:2 },
+    { id:'compact', name:'圧縮構文', tag:'節約', symbol:'M−1', color:'mint', desc:'1稼働あたり物質消費−1（下限1）。', dM:-1 },
+    { id:'duality', name:'双対の鍵', tag:'調和', symbol:'L+D', color:'violet', desc:'1稼働あたり光量+5、知識+2。電力+2。', dL:5, dD:2, dE:2 }
+  ];
+  const CHIP_MAP = Object.fromEntries(CHIPS.map(c=>[c.id,c]));
+  const FORMULA_MAP = Object.fromEntries(FORMULAS.map(f=>[f.id,f]));
+  const CONTRACTS = [
+    {title:'点火の証明',sub:'光量と知識を同時に生産せよ',l:20,d:12,rewardL:36,rewardD:9,formula:'prism',chips:['light'],message:'光学合成式と加算子が解放された。'},
+    {title:'二つの目的',sub:'限られた資源で両方の生産目標を突破',l:44,d:19,rewardL:80,rewardD:26,formula:'inverse',chips:['data','eco'],message:'反転導出式と2種類の演算子が解放された。'},
+    {title:'ボトルネック突破',sub:'負荷を乗り越え、単周期の生産量を拡大',l:80,d:35,rewardL:188,rewardD:60,formula:'vector',chips:['seed','parallel'],message:'位相増幅式と定数項が解放された。'},
+    {title:'夜明けの計算機',sub:'複数の式を組み合わせて高い効率を実現',l:145,d:60,rewardL:360,rewardD:136,formula:'zero',chips:['proof','compact'],message:'零点炉と高度な省資源演算が解放された。'},
+    {title:'最適化の彼方',sub:'大規模な整数計画モデルを成立させる',l:260,d:115,rewardL:720,rewardD:288,formula:'recursion',chips:['amplify'],message:'自己再帰式と過給演算が解放された。'},
+    {title:'方程式の星座',sub:'数式航路の全生産系を統合する',l:490,d:205,rewardL:1800,rewardD:720,formula:null,chips:['duality','light','data'],message:'主航路を完全踏破。究極の演算子を獲得した。'}
+  ];
+  const RESEARCH = [
+    {id:'matter',icon:'layers',title:'物質展開',desc:'周期ごとの物質上限 +4',baseL:174,baseD:0,scale:1.56,max:20},
+    {id:'energy',icon:'zap',title:'電力拡張',desc:'周期ごとの電力上限 +5',baseL:216,baseD:0,scale:1.56,max:20},
+    {id:'calibration',icon:'aperture',title:'係数校正',desc:'すべての式の単位出力が約16%増加',baseL:90,baseD:285,scale:1.83,max:13},
+    {id:'slots',icon:'network',title:'構文スロット',desc:'各式の演算子枠を増やす（最大3枠）',baseL:450,baseD:525,scale:2.9,max:2},
+    {id:'bandwidth',icon:'cpu',title:'並列制御',desc:'すべての式の最大稼働回数 +1',baseL:390,baseD:255,scale:1.86,max:6}
+  ];
+  const RESEARCH_MAP = Object.fromEntries(RESEARCH.map(r=>[r.id,r]));
+  const TRIALS = [
+    {id:'t1',title:'二律背反',subtitle:'初期式2種類だけで、両資源を確保',l:23,d:8,m:9,e:12,forms:2,rewardL:150,rewardD:42},
+    {id:'t2',title:'三角関係',subtitle:'3式の相互補完を利用して生産',l:29,d:18,m:13,e:19,forms:3,rewardL:250,rewardD:85},
+    {id:'t3',title:'観測の壁',subtitle:'限られた電力で研究量を押し上げる',l:40,d:30,m:18,e:28,forms:4,rewardL:470,rewardD:160},
+    {id:'t4',title:'相補性',subtitle:'5式の中から必要なものを選び抜く',l:79,d:30,m:24,e:36,forms:5,rewardL:850,rewardD:350},
+    {id:'t5',title:'究極の定式化',subtitle:'全式と最新の演算子で突破を目指せ',l:160,d:75,m:36,e:51,forms:7,rewardL:720,rewardD:288}
+  ];
+  const ACHIEVEMENTS = [
+    {id:'first',name:'最適解はここに',desc:'はじめて生産周期を実行',req:s=>s.cycles>=1},
+    {id:'light100',name:'光の粒子',desc:'累計光量100を生産',req:s=>s.totalLight>=100},
+    {id:'data100',name:'観測の習慣',desc:'累計知識100を生産',req:s=>s.totalData>=100},
+    {id:'optimizer',name:'再計算の達人',desc:'20回の最適化計算を実行',req:s=>s.solves>=20},
+    {id:'architect',name:'式の設計士',desc:'異なる式へ演算子を2つ装着',req:s=>Object.values(s.equipped).filter(v=>v.some(Boolean)).length>=2},
+    {id:'chapter3',name:'第三の証明',desc:'契約3をクリア',req:s=>s.contract>=3},
+    {id:'cycle100',name:'百回の鼓動',desc:'生産周期100回',req:s=>s.cycles>=100},
+    {id:'trophy',name:'試験室の勝者',desc:'3つの最適化試験を突破',req:s=>s.trials.length>=3},
+    {id:'final',name:'演算の星座',desc:'メイン契約をすべて達成',req:s=>s.contract>=CONTRACTS.length}
+  ];
+  const safeInt=(x,limit=MAX_CURRENCY)=>Number.isFinite(Number(x))?Math.max(0,Math.min(limit,Math.floor(Number(x)))):0;
+  const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
+  function initialState(now=Date.now()) {
+    return {
+      version:SAVE_VERSION,light:0,data:0,totalLight:0,totalData:0,contract:0,contractReady:false,
+      upgrades:{matter:0,energy:0,calibration:0,slots:0,bandwidth:0},
+      chips:{light:0,data:0,eco:0,seed:0,parallel:0,proof:0,amplify:0,compact:0,duality:0},
+      equipped:Object.fromEntries(FORMULAS.map(f=>[f.id, [null,null,null]])),
+      minRuns:Object.fromEntries(FORMULAS.map(f=>[f.id,0])),
+      weight:3,paused:false,cycles:0,solves:0,activeTab:'command',trials:[],
+      achievements:[],history:[],events:[],selected:'helios',tutorial:0,
+      lastTick:now,created:now,updated:now,lastCycle:null
+    };
+  }
+  function sanitize(raw,now=Date.now()){
+    const v=initialState(now);
+    if (!raw || typeof raw!=='object' || raw.version!==SAVE_VERSION) return v;
+    for(const k of ['light','data','totalLight','totalData','contract','cycles','solves','tutorial','created','lastTick','updated']) if(k in raw) v[k]=safeInt(raw[k],k.endsWith('Tick')||k==='created'||k==='updated'?1e16:MAX_CURRENCY);
+    v.contract=clamp(v.contract,0,CONTRACTS.length);
+    v.weight=clamp(safeInt(raw.weight||3,10),1,10);
+    v.paused=!!raw.paused;
+    v.contractReady=!!raw.contractReady;
+    v.selected=FORMULA_MAP[raw.selected] ? raw.selected : 'helios';
+    v.activeTab=['command','formulas','lab','archive'].includes(raw.activeTab)?raw.activeTab:'command';
+    if(raw.upgrades&&typeof raw.upgrades==='object')for(const r of RESEARCH)v.upgrades[r.id]=clamp(safeInt(raw.upgrades[r.id]),0,r.max);
+    if(raw.chips&&typeof raw.chips==='object')for(const c of CHIPS)v.chips[c.id]=clamp(safeInt(raw.chips[c.id]),0,99);
+    if(raw.equipped&&typeof raw.equipped==='object') {
+      for(const f of FORMULAS){const a=raw.equipped[f.id];if(Array.isArray(a))v.equipped[f.id]=[0,1,2].map(i=>CHIP_MAP[a[i]]?a[i]:null);}
+    }
+    // Eliminate duplicate/illegally equipped chips and slots on corrupt/old saves.
+    const used={};for(const f of FORMULAS){let slots=1+v.upgrades.slots;for(let i=0;i<3;i++){
+      const id=v.equipped[f.id][i];if(i>=slots||f.unlock>v.contract||!id||(used[id]||0)>=v.chips[id])v.equipped[f.id][i]=null;
+      else used[id]=(used[id]||0)+1;
+    }}
+    if(raw.minRuns&&typeof raw.minRuns==='object')for(const f of FORMULAS)v.minRuns[f.id]=clamp(safeInt(raw.minRuns[f.id]),0,30);
+    v.trials=Array.isArray(raw.trials)?[...new Set(raw.trials.filter(id=>TRIALS.some(t=>t.id===id)))]:[];
+    v.achievements=Array.isArray(raw.achievements)?[...new Set(raw.achievements.filter(id=>ACHIEVEMENTS.some(a=>a.id===id)))]:[];
+    v.history=Array.isArray(raw.history)?raw.history.slice(-32).map(x=>({l:safeInt(x.l),d:safeInt(x.d)})):[];
+    v.events=Array.isArray(raw.events)?raw.events.slice(-30).filter(e=>typeof e==='string').map(e=>e.slice(0,160)):[];
+    v.lastCycle=raw.lastCycle&&typeof raw.lastCycle==='object'?{l:safeInt(raw.lastCycle.l),d:safeInt(raw.lastCycle.d),usageM:safeInt(raw.lastCycle.usageM),usageE:safeInt(raw.lastCycle.usageE)}:null;
+    if(v.lastTick>now+60000)v.lastTick=now;
+    return v;
+  }
+  function budgets(s) { return {m:14+4*s.upgrades.matter, e:18+5*s.upgrades.energy}; }
+  function unlocked(f,s){return f.unlock<=s.contract;}
+  function compile(f,s){
+    let m=f.matter,e=f.energy,l=f.light,d=f.data,bL=0,bD=0,cap=f.cap+s.upgrades.bandwidth,mult=1;
+    for(const id of s.equipped[f.id]||[]){const chip=CHIP_MAP[id];if(!chip)continue;
+      m+=chip.dM||0;e+=chip.dE||0;l+=chip.dL||0;d+=chip.dD||0;bL+=chip.bL||0;bD+=chip.bD||0;cap+=chip.dCap||0;mult*=chip.mult||1;
+    }
+    const calibration=Math.pow(1.16,s.upgrades.calibration);
+    return {id:f.id,name:f.name,color:f.color,min:clamp(safeInt(s.minRuns?.[f.id]),0,cap),m:Math.max(1,m),e:Math.max(1,e),l:Math.max(0,Math.floor(l*mult*calibration+1e-9)),d:Math.max(0,Math.floor(d*mult*calibration+1e-9)),bL:Math.floor(bL*calibration+1e-9),bD:Math.floor(bD*calibration+1e-9),cap:clamp(cap,1,30)};
+  }
+  function compileAll(s){return FORMULAS.filter(f=>unlocked(f,s)).map(f=>compile(f,s));}
+  /** Exact bounded-integer two-resource knapsack DP, including activation bonuses.
+    max Σ_i [ wL*(l_i*x_i + bL_i*[x_i>0]) + wD*(d_i*x_i+bD_i*[x_i>0]) ]
+    s.t. Σ m_i*x_i ≤ M, Σ e_i*x_i ≤ E, x_i ∈ {0,..,cap_i}.
+    Each DP layer enumerates the bounded integer decision for one formula.
+    No heuristics, LP relaxation or rounding of feasible decisions. */
+  function solve(forms,M,E,weight=3){
+    M=clamp(Math.floor(M),0,200);E=clamp(Math.floor(E),0,220);
+    const w=clamp(Number(weight)||3,1,10);
+    const stride=E+1,size=(M+1)*stride;
+    let old=new Float64Array(size);old.fill(-Infinity);old[0]=0;
+    const parents=[],decisions=[];
+    let evaluated=0;
+    for(const f of forms){
+      const next=new Float64Array(size);next.fill(-Infinity);
+      const parent=new Int32Array(size);parent.fill(-1);
+      const choice=new Uint8Array(size);
+      const max=clamp(safeInt(f.cap),0,30);
+      for(let m=0;m<=M;m++)for(let e=0;e<=E;e++){
+        const from=m*stride+e,base=old[from];if(base===-Infinity)continue;
+        const lim=Math.min(max,Math.floor((M-m)/f.m),Math.floor((E-e)/f.e));
+        const lower=clamp(safeInt(f.min),0,max);
+        for(let x=lower;x<=lim;x++){
+          evaluated++;
+          const nm=m+f.m*x,ne=e+f.e*x,at=nm*stride+ne;
+          const l=f.l*x+(x>0?f.bL:0),d=f.d*x+(x>0?f.bD:0);
+          const score=base+l+w*d;
+          if(score>next[at]+1e-8){next[at]=score;parent[at]=from;choice[at]=x;}
+        }
+      }
+      parents.push(parent);decisions.push(choice);old=next;
+    }
+    let best=-Infinity,at=0;
+    for(let i=0;i<size;i++) if(old[i]>best+1e-8){best=old[i];at=i;}
+    if(best===-Infinity)return {counts:{},l:0,d:0,score:0,usageM:0,usageE:0,M,E,weight:w,evaluated,feasible:false};
+    const counts={};let l=0,d=0;
+    for(let i=forms.length-1;i>=0;i--){
+      const f=forms[i],x=decisions[i][at];counts[f.id]=x;
+      l+=f.l*x+(x>0?f.bL:0);d+=f.d*x+(x>0?f.bD:0);
+      at=parents[i][at];
+      if(at<0)throw new Error('DP reconstruction failed');
+    }
+    const usageM=forms.reduce((a,f)=>a+f.m*(counts[f.id]||0),0);
+    const usageE=forms.reduce((a,f)=>a+f.e*(counts[f.id]||0),0);
+    return {counts,l,d,score:l+w*d,usageM,usageE,M,E,weight:w,evaluated,feasible:usageM<=M&&usageE<=E};
+  }
+  function plan(s){const {m,e}=budgets(s);return solve(compileAll(s),m,e,s.weight);}
+  function insight(s){
+    const forms=compileAll(s),b=budgets(s),base=solve(forms,b.m,b.e,s.weight);
+    const m=solve(forms,b.m+1,b.e,s.weight),e=solve(forms,b.m,b.e+1,s.weight);
+    return {base,marginalM:m.score-base.score,marginalE:e.score-base.score};
+  }
+  function addEvent(s,msg){s.events.unshift(msg);s.events=s.events.slice(0,30);}
+  function cycle(s,p,repeat=1){
+    const n=clamp(safeInt(repeat,MAX_OFFLINE_CYCLES),0,MAX_OFFLINE_CYCLES);
+    if(!n||!p.feasible)return {success:false};
+    s.light=clamp(s.light+p.l*n,0,MAX_CURRENCY);s.data=clamp(s.data+p.d*n,0,MAX_CURRENCY);
+    s.totalLight=clamp(s.totalLight+p.l*n,0,MAX_CURRENCY);s.totalData=clamp(s.totalData+p.d*n,0,MAX_CURRENCY);
+    s.cycles+=n;
+    s.lastCycle={l:p.l,d:p.d,usageM:p.usageM,usageE:p.usageE};
+    if(n===1){s.history.push({l:p.l,d:p.d});s.history=s.history.slice(-32);}
+    else {for(let i=0;i<Math.min(n,32);i++)s.history.push({l:p.l,d:p.d});s.history=s.history.slice(-32);}
+    const contract=CONTRACTS[s.contract];
+    if(contract&&!s.contractReady&&p.l>=contract.l&&p.d>=contract.d){s.contractReady=true;addEvent(s,`契約「${contract.title}」の条件を達成`);}
+    return {success:true,producedL:p.l*n,producedD:p.d*n,contractReady:s.contractReady};
+  }
+  function claimContract(s){
+    const c=CONTRACTS[s.contract];if(!c||!s.contractReady)return {ok:false,reason:'まだ条件を達成していません'};
+    s.light=clamp(s.light+c.rewardL,0,MAX_CURRENCY);s.data=clamp(s.data+c.rewardD,0,MAX_CURRENCY);
+    for(const chip of c.chips)s.chips[chip]=(s.chips[chip]||0)+1;
+    s.contract++;s.contractReady=false;addEvent(s,`契約達成「${c.title}」 — ${c.message}`);
+    return {ok:true,contract:c};
+  }
+  function upgradePrice(s,id){
+    const r=RESEARCH_MAP[id];if(!r)return null;
+    const lvl=s.upgrades[id];return {l:Math.ceil(r.baseL*Math.pow(r.scale,lvl)),d:Math.ceil(r.baseD*Math.pow(r.scale,lvl))};
+  }
+  function buyUpgrade(s,id){
+    const r=RESEARCH_MAP[id];if(!r)return {ok:false,reason:'研究が存在しません'};
+    if(s.upgrades[id]>=r.max)return {ok:false,reason:'最大レベルです'};
+    const p=upgradePrice(s,id);
+    if(s.light<p.l||s.data<p.d)return {ok:false,reason:'研究資源が不足しています'};
+    s.light-=p.l;s.data-=p.d;s.upgrades[id]++;
+    addEvent(s,`研究完了「${r.title}」 Lv.${s.upgrades[id]}`);
+    return {ok:true};
+  }
+  function setMinRun(s,formId,count){
+    const f=FORMULA_MAP[formId];if(!f||!unlocked(f,s))return {ok:false,reason:'未解放の式です'};
+    const compiled=compile(f,s);const val=clamp(safeInt(count),0,compiled.cap);
+    const next={...s.minRuns,[formId]:val};const forms=compileAll({...s,minRuns:next});
+    const b=budgets(s);
+    if(forms.reduce((a,f)=>a+f.m*f.min,0)>b.m||forms.reduce((a,f)=>a+f.e*f.min,0)>b.e)return {ok:false,reason:'物質または電力の制約を超えます'};
+    s.minRuns=next;return {ok:true};
+  }
+  function equippedCount(s,id){return FORMULAS.reduce((a,f)=>a+s.equipped[f.id].filter(x=>x===id).length,0);}
+  function equip(s,formId,index,chipId){
+    const f=FORMULA_MAP[formId];if(!f||!unlocked(f,s))return {ok:false,reason:'この式は未解放です'};
+    if(!Number.isInteger(index)||index<0||index>=1+s.upgrades.slots)return {ok:false,reason:'このスロットは未解放です'};
+    if(chipId!==null&&!CHIP_MAP[chipId])return {ok:false,reason:'演算子が存在しません'};
+    if(chipId!==null && equippedCount(s,chipId)-(s.equipped[formId][index]===chipId?1:0)>=s.chips[chipId])return {ok:false,reason:'この演算子の空きがありません'};
+    s.equipped[formId][index]=chipId;
+    return {ok:true};
+  }
+  function trialUnlocked(s,t){return s.contract>=Math.max(0,t.forms-2);}
+  function solveTrial(s,t,opts={}){
+    const forms=FORMULAS.slice(0,t.forms).map(f=>compile(f,{...s,upgrades:{matter:0,energy:0,calibration:0,slots:s.upgrades.slots,bandwidth:0}}));
+    return solve(forms,t.m,t.e,opts.weight||s.weight);
+  }
+  function claimTrial(s,trialId){
+    const t=TRIALS.find(t=>t.id===trialId);if(!t||!trialUnlocked(s,t))return {ok:false,reason:'試験が未解放です'};
+    if(s.trials.includes(trialId))return {ok:false,reason:'この報酬は受取済みです'};
+    const p=solveTrial(s,t);
+    if(p.l<t.l||p.d<t.d)return {ok:false,reason:'光量と知識の両方の目標に届いていません',plan:p};
+    s.trials.push(trialId);s.light+=t.rewardL;s.data+=t.rewardD;
+    addEvent(s,`最適化試験「${t.title}」に合格`);
+    return {ok:true,plan:p,trial:t};
+  }
+  function evaluateAchievements(s){
+    let newly=[];for(const a of ACHIEVEMENTS)if(!s.achievements.includes(a.id)&&a.req(s)){s.achievements.push(a.id);newly.push(a);}
+    return newly;
+  }
+  function format(n){
+    if(!Number.isFinite(Number(n)))return '—';
+    if(Math.abs(n)<10000)return Math.floor(n).toLocaleString('ja-JP');
+    if(Math.abs(n)<1e7)return (n/10000).toFixed(n<1e5?1:0)+'万';
+    if(Math.abs(n)<1e11)return (n/1e8).toFixed(2)+'億';
+    return n.toExponential(2).replace('e+',' × 10^');
+  }
+  return {SAVE_VERSION,CYCLE_MS,MAX_OFFLINE_CYCLES,FORMULAS,CHIPS,CONTRACTS,RESEARCH,TRIALS,ACHIEVEMENTS,FORMULA_MAP,CHIP_MAP,
+    initialState,sanitize,budgets,unlocked,compile,compileAll,solve,plan,insight,cycle,claimContract,
+    upgradePrice,buyUpgrade,setMinRun,equippedCount,equip,trialUnlocked,solveTrial,claimTrial,evaluateAchievements,format,addEvent};
+});
+
+</script>
+  <script>
+/* FORMULA / ARK — UI controller. All production rules live in core.js. */
+(function(){
+'use strict';
+const C=window.FormulaCore;
+const KEY='formula-ark-save-v3';
+const UI_KEY='formula-ark-ui-v1';
+let s, currentPlan, selection={formula:'helios',slot:0}, modal=null, margin=null;
+let dirty=false, lastRender=0, resetting=false;
+let soundEnabled=false, audioContext=null;
+const qs=(sel)=>document.querySelector(sel);
+const money=(n)=>C.format(n);
+const num=(n)=>Number(n).toLocaleString('ja-JP');
+const esc=(value)=>String(value).replace(/[&<>"']/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[x]));
+const icons={
+  grid:'<path d="M3 3h8v8H3zM13 3h8v8h-8zM3 13h8v8H3zM13 13h8v8h-8z"/>',
+  sigma:'<path d="M18 4H7l6 8-6 8h11"/>',
+  flask:'<path d="M9 3h6M10 3v7l-6 9a2 2 0 0 0 2 3h12a2 2 0 0 0 2-3l-6-9V3M8 16h8"/>',
+  award:'<circle cx="12" cy="8" r="5"/><path d="m8 12-2 9 6-3 6 3-2-9"/>',
+  play:'<path d="m8 5 11 7-11 7V5Z"/>',
+  pause:'<path d="M8 5v14M16 5v14"/>',
+  check:'<path d="m4 12 5 5L20 6"/>',
+  plus:'<path d="M12 5v14M5 12h14"/>',
+  minus:'<path d="M5 12h14"/>',
+  bolt:'<path d="m13 2-9 12h7l-1 8 10-13h-7l0-7Z"/>',
+  layers:'<path d="m12 3 9 5-9 5-9-5 9-5ZM3 12l9 5 9-5M3 16l9 5 9-5"/>',
+  activity:'<path d="M3 12h4l3-7 4 14 3-7h4"/>',
+  wand:'<path d="m4 20 16-16M14 3l1-2M20 10l2 1M5 4 4 2M18 17l2 2"/>',
+  lock:'<rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/>',
+  chip:'<rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 9h6v6H9zM9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/>',
+  info:'<circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7h.01"/>',
+  refresh:'<path d="M20 7V3l-4 4M20 7A8 8 0 1 0 21 14"/>',
+  file:'<path d="M6 2h9l5 5v15H6zM15 2v6h5M9 12h8M9 16h8"/>',
+  download:'<path d="M12 3v13m-5-5 5 5 5-5M4 19h16"/>',
+  upload:'<path d="M12 21V8m-5 5 5-5 5 5M4 5h16"/>',
+  alert:'<path d="m12 2 10 18H2L12 2ZM12 9v5M12 17h.01"/>',
+  arrow:'<path d="M5 12h14m-7-7 7 7-7 7"/>',
+  orbit:'<circle cx="12" cy="12" r="3"/><ellipse cx="12" cy="12" rx="11" ry="5" transform="rotate(45 12 12)"/><ellipse cx="12" cy="12" rx="11" ry="5" transform="rotate(-45 12 12)"/>',
+  spark:'<path d="m12 2 2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5L12 2Z"/>',
+  close:'<path d="M5 5 19 19M19 5 5 19"/>',
+  eye:'<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/>',
+  gauge:'<path d="M3 16a9 9 0 1 1 18 0M12 14l4-5M9 20h6"/>',
+  target:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>',
+  clock:'<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 3"/>'
+};
+function icon(name,cl=''){return `<svg class="btn-icon ${cl}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${icons[name]||icons.orbit}</svg>`;}
+const menu=[['command','管制室','grid'],['formulas','式の設計','sigma'],['lab','研究・試験','flask'],['archive','記録','award']];
+function readSave(){try {const raw=localStorage.getItem(KEY);return raw?C.sanitize(JSON.parse(raw)):C.initialState();}catch(err){console.warn('Save could not be read',err);return C.initialState();}}
+function save(){s.updated=Date.now();try{localStorage.setItem(KEY,JSON.stringify(s));dirty=false;}catch(e){if(!window.__saveWarned){toast('保存に失敗しました。空き容量またはプライベートモードを確認してください。','error');window.__saveWarned=true;}}}
+function checkAchievements(){const a=C.evaluateAchievements(s);for(const ach of a){toast('実績解除：'+ach.name,'success');C.addEvent(s,'実績解除「'+ach.name+'」');}}
+function replan(announce=false){currentPlan=C.plan(s);s.solves++;margin=null;checkAchievements();dirty=true;if(announce)toast(currentPlan.feasible?'整数計画の最適解を更新しました':'制約により実行可能解がありません',currentPlan.feasible?'success':'error');}
+function toast(msg,type='normal'){
+  const stack=qs('#toast-stack');if(!stack)return;const element=document.createElement('div');element.className='toast '+type;element.textContent=msg;stack.appendChild(element);
+  while(stack.children.length>3)stack.firstElementChild.remove();setTimeout(()=>element.remove(),3800);
+}
+function playSound(kind='tap'){
+  if(!soundEnabled)return;
+  try {
+    const Context=window.AudioContext||window.webkitAudioContext;if(!Context)return;
+    audioContext=audioContext||new Context();
+    const notes=kind==='win'?[523,659,880]:kind==='build'?[440,660]:[530];
+    const t=audioContext.currentTime;
+    notes.forEach((freq,i)=>{const osc=audioContext.createOscillator(),gain=audioContext.createGain(),at=t+i*.075;
+      osc.type='sine';osc.frequency.setValueAtTime(freq,at);
+      gain.gain.setValueAtTime(.0001,at);gain.gain.exponentialRampToValueAtTime(.035,at+.016);gain.gain.exponentialRampToValueAtTime(.0001,at+.17);
+      osc.connect(gain);gain.connect(audioContext.destination);osc.start(at);osc.stop(at+.175);
+    });
+  }catch(e){}
+}
+function start(){
+  try{soundEnabled=JSON.parse(localStorage.getItem(UI_KEY)||'{}').sound===true;}catch(e){}
+  s=readSave();selection.formula=s.selected;
+  replan();
+  const now=Date.now();
+  if(!s.paused){const elapsed=Math.max(0,now-s.lastTick);const periods=Math.min(C.MAX_OFFLINE_CYCLES,Math.floor(elapsed/C.CYCLE_MS));
+    if(periods>0){const result=C.cycle(s,currentPlan,periods);if(result.success){checkAchievements();if(periods>1)C.addEvent(s,`不在中に${periods}周期を生産（最大12分まで）`);s.lastTick=now-elapsed%C.CYCLE_MS;if(periods>1)toast(`オフライン生産 +${money(result.producedL)} 光量 / +${money(result.producedD)} 知識`,'success');}}
+  }else s.lastTick=now;
+  save();render();
+  document.addEventListener('click',onClick);
+  document.addEventListener('change',onChange);
+  document.addEventListener('keydown',onKey);
+  setInterval(tick,110);
+  if('serviceWorker' in navigator && (location.protocol==='https:'||location.hostname==='localhost'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+}
+function tick(){
+  const now=Date.now(),bar=qs('#tick-fill'),time=qs('#tick-countdown');
+  if(s.paused){if(bar)bar.style.width='0%';if(time)time.textContent='一時停止中';return;}
+  const delta=now-s.lastTick;
+  if(delta>=C.CYCLE_MS){
+    const count=Math.min(C.MAX_OFFLINE_CYCLES,Math.floor(delta/C.CYCLE_MS));
+    s.lastTick=now-(delta%C.CYCLE_MS);
+    const r=C.cycle(s,currentPlan,count);if(r.success){checkAchievements();if(s.contractReady&&!window.__missionToastShown){toast('契約の生産条件を達成！ 報酬を受け取りましょう。','success');window.__missionToastShown=true;}save();render(true);}
+  }
+  if(bar)bar.style.width=`${Math.min(100,Math.max(0,(now-s.lastTick)/C.CYCLE_MS*100))}%`;
+  if(time)time.textContent=`次の生産まで ${((C.CYCLE_MS-(now-s.lastTick))/1000).toFixed(1)}s`;
+}
+function navigate(tab){s.activeTab=tab;save();render();window.scrollTo({top:0,behavior:'instant'});}
+function render(keepScroll=false){
+  lastRender=Date.now();const y=keepScroll?window.scrollY:0;
+  qs('#side-nav').innerHTML=`<p class="side-caption">NAVIGATION</p>${menu.map(([id,name,glyph])=>`<button class="side-link ${s.activeTab===id?'active':''}" data-act="tab" data-id="${id}" aria-current="${s.activeTab===id?'page':'false'}">${icon(glyph)}<span>${name}</span></button>`).join('')}<div class="side-footer">ENGINE : EXACT INTEGER DP<br>NETWORK : OFFLINE READY<br>BUILD 0.9.0 / LOCAL</div>`;
+  qs('#bottom-nav').innerHTML=menu.map(([id,name,glyph])=>`<button class="bottom-link ${s.activeTab===id?'active':''}" data-act="tab" data-id="${id}" aria-label="${name}" aria-current="${s.activeTab===id?'page':'false'}">${icon(glyph)}<span>${name}</span></button>`).join('');
+  qs('#view').innerHTML=(s.activeTab==='command'?renderCommand():s.activeTab==='formulas'?renderFormulas():s.activeTab==='lab'?renderLab():renderArchive())+'<div class="footer-note">FORMULA / ARK · 独立したオフラインゲーム · 数式と制約が、次の航路を決める。</div>';
+  if(keepScroll&&Math.abs(window.scrollY-y)>2)window.scrollTo({top:y,behavior:'instant'});
+}
+function pageHeading(k,title,desc,aside=''){return `<div class="page-head"><div><div class="eyebrow">${k}</div><h1>${title}</h1><p>${desc}</p></div><div class="head-aside">${aside}</div></div>`;}
+function section(no,title,right=''){return `<div class="section-title"><h2><span class="index">${no}&nbsp; / &nbsp;</span>${title}</h2>${right?`<small>${right}</small>`:''}</div>`;}
+function progress(label,val,target,isData=false){return `<div class="progress-row"><span class="progress-name">${label}</span><div class="progress-track"><span class="progress-fill ${isData?'bluefill':''}" style="width:${Math.min(100,val/target*100)}%"></span></div><span class="progress-value mono">${money(val)} / ${money(target)}</span></div>`;}
+function renderCommand(){
+  const p=currentPlan,b=C.budgets(s),c=C.CONTRACTS[s.contract],solved=p.feasible;
+  let mission=c?`<div class="panel contract"><div class="contract-header"><div><div class="mission-step">CONTRACT ${String(s.contract+1).padStart(2,'0')} / ${String(C.CONTRACTS.length).padStart(2,'0')}</div><h2 class="mission-title">${esc(c.title)}</h2><div class="mission-desc">${esc(c.sub)}</div></div><span class="pill ${s.contractReady?'good':'cool'}">${s.contractReady?'達成':'進行中'}</span></div>${progress('光量',p.l,c.l)}${progress('知識',p.d,c.d,true)}<div class="contract-claim"><div class="rewards">報酬：光量 +${num(c.rewardL)} / 知識 +${num(c.rewardD)}<br>${c.formula?`新たな数式「${C.FORMULA_MAP[c.formula].name}」`:'メイン航路完了'} + 演算子</div><button class="btn ${s.contractReady?'primary':'soft'}" data-act="claim" ${!s.contractReady?'disabled':''}>${s.contractReady?'報酬を受け取る':'生産条件を達成する'} ${icon('arrow')}</button></div></div>`:
+    `<div class="panel contract"><span class="pill good">ALL CONTRACTS COMPLETE</span><h2 class="mission-title">航路完全踏破</h2><p class="mission-desc">すべてのメイン契約を達成しました。研究・最適化試験・実績のコンプリートに挑戦できます。</p><div class="contract-done">${icon('check')}　数式航路のメインミッションをクリアしました。</div></div>`;
+  const helper=!p.feasible?'最低稼働の制約が物質か電力の上限を超えています。「式の設計」で下限を減らしてください。':
+    c&&p.l<c.l?'光量が不足しています。光子圧縮の最低稼働回数を増やすか、出力係数を強化しましょう。':
+    c&&p.d<c.d?'知識が不足しています。観測演算の最低稼働を増やすか、知識を重視する設定に変更しましょう。':
+    c?'目標を満たす最適解が見つかりました。次の生産周期で契約を達成します。':
+    '完了済み。係数校正や新しい演算子で、さらに効率的な数式を探求しましょう。';
+  return `${pageHeading('COMMAND DECK','数式航路を、最適化する。','資源と数式を設計し、ソルバの最適解で船を前進させよう。',`<span class="pill good">${icon('check')} LOCAL ENGINE</span>`)}
+  <div class="panel hero"><div class="hero-content"><span class="eyebrow">THE EQUATION ENGINE IS ONLINE</span><h1>世界は、<br><span>式から生まれる。</span></h1><p>限られた資源。無限の組み合わせ。<br>正しい数式が、航路を切り拓く。</p><button class="btn hero-button" data-act="tab" data-id="formulas">${icon('sigma')} 数式を設計する ${icon('arrow')}</button></div><div class="orbit" aria-hidden="true"><div class="orbit-ring r1"></div><div class="orbit-ring r2"></div><div class="orbit-ring r3"></div><div class="orbit-core"><b>Σ</b></div><div class="orbit-small">∑ xᵢ · fᵢ → max Z</div></div></div>
+  ${section('01','生成資源',s.paused?'生産一時停止':'4秒ごとに最適化計画を実行')}
+  <div class="grid-2"><div class="panel stat-card"><div class="flex between center"><span class="label">光量 / LUMEN</span><span class="gold">✧</span></div><div class="stat-value mono gold">${money(s.light)}</div><div class="rate mono">+${money(p.l)} / cycle</div></div><div class="panel stat-card"><div class="flex between center"><span class="label">知識 / INSIGHT</span><span class="blue">⌁</span></div><div class="stat-value mono blue">${money(s.data)}</div><div class="rate data mono">+${money(p.d)} / cycle</div></div></div>
+  <div class="panel" style="padding:14px 20px;margin-top:13px"><div class="flex between center" style="margin-bottom:9px"><div class="flex center gap8"><span class="opt-badge">${solved?'OPTIMAL SOLUTION':'INFEASIBLE'}</span><span id="tick-countdown" class="muted tiny">次の生産まで 4.0s</span></div><button data-act="pause" class="mini-action">${s.paused?'▶ 再開':'Ⅱ 一時停止'}</button></div><div class="tick-progress"><div id="tick-fill"></div></div></div>
+  ${section('02','今の契約と目標')}${mission}
+  <div class="split" style="margin-top:16px"><div>${renderPlanner(p,b,helper)}</div><div>${renderOptimizer(p)}</div></div>
+  ${s.tutorial<2?`<div style="margin-top:16px" class="explanation"><div class="title">初めての航路ガイド / ${s.tutorial+1} of 2</div>${s.tutorial===0?'ソルバは「光量＋重み×知識」が最大になる稼働回数を自動計算します。しかし契約では両方が必要です。まず「式の設計」で光子圧縮の最低稼働回数を 3 に設定しましょう。':'式に演算子を装着すると、単位生産量や資源消費を変えられます。契約達成後に獲得できる演算子も確認しましょう。'}<div class="tutorial-cta"><button class="btn sm primary" data-act="tab" data-id="formulas">式の設計へ ${icon('arrow')}</button><button class="btn sm" data-act="tutorial-next">${s.tutorial===0?'理解した':'ガイドを閉じる'}</button></div></div>`:''}
+  ${section('03','生産履歴','直近32周期')}${renderHistory()}`;
+}
+function renderPlanner(p,b,helper){
+  return `<div class="panel panel-inner"><div class="flex between center"><div><h3 class="panel-title">整数計画ソルバ</h3><div class="panel-sub">有限資源の下で、生産目的関数を最大化</div></div><span class="pill ${p.feasible?'good':'warn'}">${p.feasible?'OPTIMAL':'INFEASIBLE'}</span></div><div class="budget"><div class="budget-chip"><span class="label">物質 / M</span><div class="big mono">${p.usageM}<small> / ${b.m}</small></div><div class="small-track"><b style="width:${Math.min(100,p.usageM/b.m*100)}%"></b></div></div><div class="budget-chip"><span class="label">電力 / E</span><div class="big mono">${p.usageE}<small> / ${b.e}</small></div><div class="small-track"><b style="width:${Math.min(100,p.usageE/b.e*100)}%"></b></div></div></div><div class="plan-headline"><span class="label">最大目的値 Z*</span><span class="score mono">${money(p.score)}</span></div><div class="small muted mono">maximize Z = L + ${s.weight}D</div><div class="plan-list">${C.compileAll(s).map(f=>{const data=C.FORMULA_MAP[f.id],n=p.counts[f.id]||0;return `<div class="plan-line"><div><div class="formula-name">${esc(f.name)}</div><div class="formula-sub mono">x ≥ ${f.min} · max ${f.cap}</div></div><div class="planbar"><b style="width:${f.cap?n/f.cap*100:0}%;--bar-color:${data.color}"></b></div><span class="plan-num mono">${n}<span class="faint tiny">/${f.cap}</span></span></div>`}).join('')}</div><div class="hint">${icon('info')} ${helper}</div><div class="divider"></div><div class="flex between center gap8 wrap"><span class="muted tiny">評価した状態遷移：${num(p.evaluated)}</span><button class="btn sm soft" data-act="replan">${icon('refresh')} 再最適化</button></div></div>`;
+}
+function renderOptimizer(p){
+  const btns=[1,2,3,5,8];
+  return `<div class="panel panel-inner"><div class="flex between center"><h3 class="panel-title">目的関数を調整する</h3><span class="pill cool">MULTI-OBJECTIVE</span></div><div class="panel-sub">知識の評価重みを変えると、最適な資源配分が変化します。</div><div class="equation" style="margin-top:13px">max&nbsp; Z = <span>L</span> + <span>λ</span> D<br><span class="muted small">λ = ${s.weight}</span></div><div class="weight-tabs">${btns.map(n=>`<button class="weight-chip ${s.weight===n?'active':''}" data-act="weight" data-value="${n}" aria-pressed="${s.weight===n}">λ=${n}<small>${n===1?'光量':n===2?'やや光':n===3?'標準':n===5?'知識': '研究'}</small></button>`).join('')}</div><div class="explanation">目的値が最大でも、契約に必要な両方の生産量が足りるとは限りません。式ごとの「最低稼働」を制約として追加することが攻略の鍵です。</div><div class="divider"></div><div class="flex between center"><h3 class="panel-title">制約の感度分析</h3><button class="btn sm" data-act="insight">${icon('gauge')} 解析</button></div><div class="panel-sub">物質または電力が1だけ増えると、最適目的値はどれだけ改善するか。</div>${margin?`<div class="margin-line"><div class="margin-stat"><span class="label">物質 +1 の価値</span><strong class="mono">+${num(margin.marginalM)}</strong><span class="tiny muted">目的値 Z の変化</span></div><div class="margin-stat"><span class="label">電力 +1 の価値</span><strong class="mono">+${num(margin.marginalE)}</strong><span class="tiny muted">目的値 Z の変化</span></div></div><p class="caption">整数最適化で再計算した差分です。線形計画の双対価格とは異なります。</p>`:`<p class="hint">［解析］を押すと、制約を緩めた最適化問題を2回解き、改善量を表示します。</p>`}</div>`;
+}
+function renderHistory(){
+  const history=s.history.length?s.history:[{l:currentPlan.l,d:currentPlan.d}];
+  const max=Math.max(1,...history.map(x=>Math.max(x.l,x.d)));
+  const space=490/(Math.max(32,history.length)),bars=history.map((h,i)=>{const x=4+i*space,lh=Math.max(1,h.l/max*73),dh=Math.max(1,h.d/max*73);return `<rect x="${x}" y="${80-lh}" width="${Math.max(3,space*.31)}" height="${lh}" rx="1" fill="#e9ae6b" opacity=".88"/><rect x="${x+space*.33}" y="${80-dh}" width="${Math.max(3,space*.31)}" height="${dh}" rx="1" fill="#8abcfb" opacity=".85"/>`}).join('');
+  return `<div class="panel panel-inner"><div class="flex between center"><div class="flex center gap12"><span class="tiny gold">■ 光量</span><span class="tiny blue">■ 知識</span></div><span class="faint tiny">LAST ${s.history.length} CYCLES</span></div><div class="chart-box"><svg class="chart-svg" viewBox="0 0 500 86" preserveAspectRatio="none" role="img" aria-label="最近の生産量履歴。オレンジが光量、青が知識"><path d="M0 80H500 M0 41H500" fill="none" stroke="#7890b1" stroke-opacity=".16" stroke-dasharray="4 5"/>${bars}</svg></div><div class="history-labels"><span>PAST</span><span>NOW</span></div></div>`;
+}
+function formulaSummary(f){const isOpen=C.unlocked(f,s),live=isOpen?C.compile(f,s):null,active=s.selected===f.id;
+  return `<button class="formula-choice ${active?'active':''} ${!isOpen?'locked':''}" data-act="select-formula" data-id="${f.id}" ${!isOpen?'disabled':''} style="--sigil-bg:${f.color}18;--sigil-color:${f.color}"><span class="formula-sigil">${esc(f.sigil)}</span><div><div class="choice-name">${esc(f.name)}</div><div class="choice-en">${esc(f.en)}</div></div><div class="choice-stat">${isOpen?`<strong class="mono">${currentPlan.counts[f.id]||0}/${live.cap}</strong><small>稼働数</small>`:icon('lock')}</div></button>`;
+}
+function renderFormulas(){
+  const f=C.FORMULA_MAP[s.selected]||C.FORMULAS[0],active=C.unlocked(f,s)?f:C.FORMULAS[0];if(active.id!==s.selected)s.selected=active.id;
+  const comp=C.compile(active,s),chips=s.equipped[active.id],avail=1+s.upgrades.slots;
+  return `${pageHeading('EQUATION EDITOR','式の設計','演算子の装着と稼働下限制約を編集し、生産モデルそのものを改造しよう。')}
+  <div class="formula-layout"><div><div class="flex between center" style="margin-bottom:12px"><span class="eyebrow">FORMULA LIBRARY</span><span class="muted tiny">${C.compileAll(s).length} / ${C.FORMULAS.length} 解放済</span></div><div class="formula-list">${C.FORMULAS.map(formulaSummary).join('')}</div><div class="explanation formula-how"><div class="title">数式編集のヒント</div>最低稼働回数はソルバにとって必ず守るべき制約です。一方、演算子は数式の係数・定数項・消費資源・最大稼働数を変化させます。<p>上限を超える指定はできません。いろいろな組合せで最大目的値と契約達成条件を両立させてください。</p></div></div>
+  <div><div class="panel"><div class="editor-top"><div class="editor-head"><div class="editor-sigil" style="--sigil-bg:${active.color}18;--sigil-color:${active.color}">${esc(active.sigil)}</div><div><span class="eyebrow">FORMULA ${active.no} / ${esc(active.en)}</span><h2>${esc(active.name)}</h2><span class="muted small">${esc(active.about)}</span></div></div><div class="equation"><div><span>L</span>(x) = ${comp.l}x ${comp.bL?`+ ${comp.bL}·[x&gt;0]`:''}</div><div><span style="color:var(--blue)">D</span>(x) = ${comp.d}x ${comp.bD?`+ ${comp.bD}·[x&gt;0]`:''}</div></div><div class="muted tiny" style="text-align:center;margin-top:10px">x ∈ ℤ, &nbsp; ${comp.min} ≤ x ≤ ${comp.cap}</div></div>
+  <div class="formula-editor"><div class="flex between center"><div class="panel-title">最低稼働の制約</div><span class="pill cool mono">x ≥ ${comp.min}</span></div><p class="caption" style="margin:5px 0">必ずこの回数以上稼働させます。ほかの式への資源配分が変わります。</p><div class="min-control"><span class="label">稼働下限 / MIN RUNS</span><div class="stepper"><button aria-label="最低稼働を1減らす" data-act="min" data-delta="-1">−</button><strong class="mono">${comp.min}</strong><button aria-label="最低稼働を1増やす" data-act="min" data-delta="1">+</button></div></div><div class="metrics-table"><div class="metric"><span>物質 / 1稼働</span><strong class="mono">${comp.m} M</strong></div><div class="metric"><span>電力 / 1稼働</span><strong class="mono">${comp.e} E</strong></div><div class="metric"><span>現在の最適稼働</span><strong class="mono">${currentPlan.counts[active.id]||0} / ${comp.cap}</strong></div><div class="metric"><span>現在の式出力（光量 / 知識）</span><strong class="mono">${comp.l*(currentPlan.counts[active.id]||0)+((currentPlan.counts[active.id]||0)>0?comp.bL:0)} / ${comp.d*(currentPlan.counts[active.id]||0)+((currentPlan.counts[active.id]||0)>0?comp.bD:0)}</strong></div></div><div class="flex between center"><h3 class="panel-title">演算子スロット</h3><span class="muted tiny">${avail} / 3 利用可能</span></div><div class="chip-slots">${[0,1,2].map(i=>`<button class="slot ${chips[i]?'filled':''} ${i>=avail?'locked':''}" data-act="open-slot" data-index="${i}" ${i>=avail?'disabled':''}>${i>=avail?icon('lock'):`<span style="font-size:19px">${chips[i]?esc(C.CHIP_MAP[chips[i]].symbol):'+'}</span>`}<span>${i>=avail?'研究で解放':chips[i]?esc(C.CHIP_MAP[chips[i]].name):'演算子を装着'}</span><span class="slot-label">SLOT ${i+1}</span></button>`).join('')}</div><div class="divider"></div><div class="flex gap8 wrap"><button class="btn primary" data-act="tab" data-id="command">${icon('check')} 管制室で結果を見る</button><button class="btn" data-act="clear-min">最低稼働をすべて解除</button></div></div></div>
+  ${section('02','所有する演算子',`${C.CHIPS.reduce((a,c)=>a+s.chips[c.id],0)} 枚`)}<div class="inventory">${C.CHIPS.map(c=>{const owned=s.chips[c.id],free=owned-C.equippedCount(s,c.id);return `<button class="chip-item ${owned?'':'unowned'}" data-act="open-slot" data-index="0" ${owned?'':'disabled'}><div class="chip-head"><span class="symbol">${esc(c.symbol)}</span><span class="chip-qty">${free} / ${owned}</span></div><strong>${esc(c.name)}</strong><div class="description">${esc(c.desc)}</div></button>`}).join('')}</div></div></div>`;
+}
+function renderLab(){
+  return `${pageHeading('RESEARCH & TRIALS','研究と最適化試験','恒久的な拡張で制約を緩め、特殊な条件下でも最適解を探そう。')}
+  <div class="grid-2"><div class="panel stat-card"><div class="label">所持光量 / LUMEN</div><div class="stat-value mono gold">${money(s.light)}</div></div><div class="panel stat-card"><div class="label">所持知識 / INSIGHT</div><div class="stat-value mono blue">${money(s.data)}</div></div></div>
+  ${section('01','研究設備',`5種類の恒久研究`)}<div class="research-grid">${C.RESEARCH.map(r=>{const lvl=s.upgrades[r.id],p=C.upgradePrice(s,r.id),capped=lvl>=r.max,buyable=!capped&&s.light>=p.l&&s.data>=p.d;return `<div class="panel research-card"><div class="research-header"><span class="research-icon">${icon(r.id==='matter'?'layers':r.id==='energy'?'bolt':r.id==='slots'?'chip':r.id==='bandwidth'?'gauge':'orbit')}</span><span class="research-lvl mono">LV ${lvl} / ${r.max}</span></div><h3>${r.title}</h3><p>${r.desc}</p><div class="bottom"><div class="price mono">${capped?'MAX LEVEL':`✧ ${money(p.l)}${p.d?`<br><span class="data">⌁ ${money(p.d)}</span>`:''}`}</div><button class="btn ${buyable?'primary':''} sm" data-act="buy" data-id="${r.id}" ${buyable?'':'disabled'}>${capped?'最大':'研究する'} ${icon('arrow')}</button></div></div>`}).join('')}</div>
+  ${section('02','最適化試験室','独立した資源制約で腕試し')}
+  <div class="explanation"><div class="title">試験ルール</div>現在の演算子、稼働下限、目的関数の重みは試験にも適用されます。ただし研究設備による物質・電力増加、係数校正、並列制御の強化は無効です。試験に合った数式を設計しましょう。各試験の報酬は一度だけ受け取れます。</div>
+  <div class="trial-list" style="margin-top:13px">${C.TRIALS.map((t,i)=>{const open=C.trialUnlocked(s,t),complete=s.trials.includes(t.id),p=open?C.solveTrial(s,t):null,ready=p&&p.feasible&&p.l>=t.l&&p.d>=t.d;return `<div class="panel trial-card"><div class="trial-top"><div><div class="eyebrow">TRIAL ${String(i+1).padStart(2,'0')}</div><h3>${esc(t.title)}</h3><div class="caption">${esc(t.subtitle)}</div></div><span class="pill ${complete?'good':!open?'warn':ready?'good':'cool'}">${complete?'合格済':!open?'LOCKED':ready?'合格条件達成':'挑戦可能'}</span></div><div class="trial-body"><div><div class="trial-values"><span>物質 <b>${t.m}</b></span><span>電力 <b>${t.e}</b></span><span>数式 <b>${t.forms}種</b></span></div><div style="margin-top:11px">${open?`<div class="small muted">現在の試験解：<span class="gold mono">L ${p.l}/${t.l}</span> &nbsp; <span class="blue mono">D ${p.d}/${t.d}</span></div>`:`<div class="small muted">契約 ${Math.max(1,t.forms-2)} 以降に解放</div>`}</div><div class="small muted" style="margin-top:5px">初回報酬：光量+${t.rewardL} / 知識+${t.rewardD}</div></div><button class="btn ${ready&&!complete?'primary':''}" data-act="trial" data-id="${t.id}" ${(!open||complete)?'disabled':''}>${complete?'獲得済':ready?'合格・報酬受取':'解を判定'} ${icon('arrow')}</button></div></div>`}).join('')}</div>`;
+}
+function renderArchive(){const completed=s.achievements.length;
+ return `${pageHeading('LOGBOOK','航路の記録','数式の研究記録、達成した実績、ローカルセーブの管理。')}
+ <div class="archive-grid"><div class="panel archive-stat"><div class="label">生産周期</div><strong class="mono">${money(s.cycles)}</strong><span class="muted tiny">CYCLES</span></div><div class="panel archive-stat"><div class="label">最適化回数</div><strong class="mono">${money(s.solves)}</strong><span class="muted tiny">SOLVES</span></div><div class="panel archive-stat"><div class="label">契約</div><strong class="mono">${s.contract}/${C.CONTRACTS.length}</strong><span class="muted tiny">CONTRACTS</span></div></div>
+ ${section('01','累計の生産記録')}<div class="grid-2"><div class="panel stat-card"><div class="label">累計光量</div><div class="stat-value mono gold">${money(s.totalLight)}</div></div><div class="panel stat-card"><div class="label">累計知識</div><div class="stat-value mono blue">${money(s.totalData)}</div></div></div>
+ ${section('02','実績',`${completed} / ${C.ACHIEVEMENTS.length} 解除`)}<div class="achievements">${C.ACHIEVEMENTS.map(a=>{const yes=s.achievements.includes(a.id);return `<div class="achievement ${yes?'earned':''}"><div class="ach-symbol">${yes?'✧':'◇'}</div><strong>${a.name}</strong><p>${a.desc}</p></div>`}).join('')}</div>
+ ${section('03','プレイガイド')}<div class="panel guide"><div class="guide-step"><span class="guide-number">1</span><div><strong>数式を最適化する</strong><p>「物質」と「電力」は1周期ごとの供給上限です。ソルバはこれらを超えない整数の稼働回数を選び、Z = 光量 + λ×知識 を最大化します。</p></div></div><div class="guide-step"><span class="guide-number">2</span><div><strong>制約を設計する</strong><p>単純な加重和の最大化は、一方の資源に偏る場合があります。式の最低稼働 x≥k を指定することで、必ず稼働する式を決められます。</p></div></div><div class="guide-step"><span class="guide-number">3</span><div><strong>演算子を収集する</strong><p>契約に合格すると新たな式と演算子を獲得します。演算子を装着すると生産係数や初回起動時の定数項、資源制約、稼働上限が変化します。</p></div></div><div class="guide-step"><span class="guide-number">4</span><div><strong>知識と光量を再投資する</strong><p>研究で物質・電力を増強し、係数校正や構文スロットを解放します。最適化試験では研究による強化が制限され、式の設計力が問われます。</p></div></div></div>
+ ${section('04','最近の航路ログ')}<div class="panel panel-inner"><ul class="activity">${s.events.length?s.events.slice(0,10).map(e=>`<li>${esc(e)}</li>`).join(''):'<li>まだ記録はありません。最初の生産周期を開始してください。</li>'}</ul></div>
+ ${section('05','セーブ・設定')}<div class="panel panel-inner"><div class="panel-title">ローカルセーブ</div><p class="caption">この端末のブラウザ内に自動保存されます。バックアップはJSONで書き出し、別の端末でも読み込めます。</p><div class="flex gap8 wrap" style="margin-top:12px"><button class="btn soft" data-act="export">${icon('download')} セーブを書き出す</button><button class="btn" data-act="import">${icon('upload')} セーブを読み込む</button><input id="import-save" type="file" accept="application/json,.json" style="display:none" aria-label="セーブファイルを選択"></div><div class="divider"></div><div class="flex between center gap12 wrap"><span class="caption">アニメーションを減らすには、端末のアクセシビリティ設定から「視差効果を減らす」を有効にしてください。</span><div class="flex gap8 wrap"><button class="btn sm" data-act="sound" aria-pressed="${soundEnabled}">効果音：${soundEnabled?'ON':'OFF'}</button><button class="btn sm" data-act="pause">${s.paused?'生産を再開':'生産を一時停止'}</button></div></div></div><div class="danger-zone" style="margin-top:14px"><div class="panel-title rose">初期化</div><p>すべてのゲーム進行と実績を削除して、最初から開始します。先にセーブを書き出すことをおすすめします。</p><button class="btn danger" data-act="reset">${icon('alert')} 全進行を初期化</button></div>`;
+}
+function openSlot(index){selection={formula:s.selected,slot:index};modal='chip';renderModal();}
+function renderModal(){
+ if(!modal){qs('#overlay-root').innerHTML='';return;}
+ if(modal==='chip'){
+ const index=selection.slot,form=C.FORMULA_MAP[selection.formula],current=s.equipped[form.id][index];
+ qs('#overlay-root').innerHTML=`<div class="overlay" data-act="outside"><div class="modal" role="dialog" aria-modal="true" aria-label="演算子選択"><div class="modal-header"><div><div class="eyebrow">OPERATOR LIBRARY</div><h2>${esc(form.name)} · SLOT ${index+1}</h2><div class="caption">装着する演算子を選択。選択中の演算子を外してから付け替えることもできます。</div></div><button class="modal-close" data-act="close-modal" aria-label="閉じる">×</button></div><div class="modal-chip-list"><button class="modal-chip" data-act="equip" data-id="none"><div><b>空のスロット</b><p>演算子を外す</p></div><span class="chip-mark">∅</span></button>${C.CHIPS.filter(c=>s.chips[c.id]>0).map(c=>{const free=s.chips[c.id]-C.equippedCount(s,c.id)+(current===c.id?1:0);return `<button class="modal-chip" data-act="equip" data-id="${c.id}" ${free<=0?'disabled':''}><div><b>${esc(c.name)} ${current===c.id?'<span class="pill good">装着中</span>':''}</b><p>${esc(c.desc)}</p><div class="tiny muted" style="margin-top:6px">利用可能：${free} / 所有 ${s.chips[c.id]}</div></div><span class="chip-mark">${esc(c.symbol)}</span></button>`}).join('')}</div></div></div>`;
+ }
+ if(modal==='reset')qs('#overlay-root').innerHTML=`<div class="overlay" data-act="outside"><div class="modal" role="alertdialog" aria-modal="true" aria-label="進行初期化の確認"><div class="eyebrow">CONFIRM RESET</div><h2>最初から航路を始めますか？</h2><p class="caption">現在の光量・知識・数式・演算子・研究・実績・試験結果はすべて失われます。この操作は元に戻せません。</p><div class="flex gap8" style="margin-top:22px"><button class="btn" data-act="close-modal">キャンセル</button><button class="btn danger" data-act="reset-confirm">完全に初期化する</button></div></div></div>`;
+}
+function closeModal(){modal=null;renderModal();}
+function onClick(e){
+ const el=e.target.closest('[data-act]');if(!el)return;
+ const act=el.dataset.act,id=el.dataset.id;
+ if(act==='outside'){if(e.target===el)closeModal();return;}
+ if(act==='close-modal'){closeModal();return;}
+ if(act==='tab'){closeModal();navigate(id);return;}
+ if(act==='weight'){s.weight=Number(el.dataset.value);replan();save();render(true);return;}
+ if(act==='pause'){s.paused=!s.paused;s.lastTick=Date.now();save();render(true);toast(s.paused?'生産を一時停止しました':'生産を再開しました');return;}
+ if(act==='replan'){replan(true);save();render(true);return;}
+ if(act==='insight') {if(!currentPlan.feasible){toast('実行可能な制約へ戻してください','error');return;}margin=C.insight(s);save();render(true);return;}
+ if(act==='claim'){
+   const r=C.claimContract(s);if(!r.ok){toast(r.reason,'error');return;}
+   window.__missionToastShown=false;replan();checkAchievements();save();render(true);playSound('win');toast('契約クリア！ '+r.contract.message,'success');return;
+ }
+ if(act==='select-formula'){s.selected=id;save();render(true);return;}
+ if(act==='min'){
+   const f=C.FORMULA_MAP[s.selected],compiled=C.compile(f,s),target=compiled.min+Number(el.dataset.delta);
+   const r=C.setMinRun(s,f.id,target);
+   if(!r.ok){toast(r.reason,'error');return;}
+   replan();save();render(true);return;
+ }
+ if(act==='clear-min'){for(const f of C.FORMULAS)s.minRuns[f.id]=0;replan();save();render(true);toast('すべての稼働下限制約を解除しました');return;}
+ if(act==='open-slot'){openSlot(Number(el.dataset.index));return;}
+ if(act==='equip'){
+   const r=C.equip(s,selection.formula,selection.slot,id==='none'?null:id);
+   if(!r.ok){toast(r.reason,'error');return;}
+   closeModal();replan();save();render(true);playSound('build');toast('数式に演算子を適用しました','success');return;
+ }
+ if(act==='buy'){
+   const r=C.buyUpgrade(s,id);if(!r.ok){toast(r.reason,'error');return;}
+   replan();save();render(true);playSound('build');toast('研究が完了しました','success');return;
+ }
+ if(act==='trial'){
+   const r=C.claimTrial(s,id);if(!r.ok){toast(r.reason,'error');return;}
+   checkAchievements();save();render(true);playSound('win');toast('最適化試験合格！ 光量と知識を獲得','success');return;
+ }
+ if(act==='tutorial-next'){s.tutorial=Math.min(2,s.tutorial+1);save();render(true);return;}
+ if(act==='sound'){
+   soundEnabled=!soundEnabled;try{localStorage.setItem(UI_KEY,JSON.stringify({sound:soundEnabled}));}catch(e){}
+   if(soundEnabled)playSound('build');render(true);toast(soundEnabled?'効果音を有効にしました':'効果音を無効にしました');return;
+ }
+ if(act==='export'){
+   const str=JSON.stringify({game:'FORMULA / ARK',exportedAt:new Date().toISOString(),save:s},null,2),blob=new Blob([str],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+   a.href=url;a.download='formula-ark-save-'+new Date().toISOString().slice(0,10)+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);toast('セーブデータを書き出しました','success');return;
+ }
+ if(act==='import'){qs('#import-save')?.click();return;}
+ if(act==='reset'){modal='reset';renderModal();return;}
+ if(act==='reset-confirm'){
+   s=C.initialState();s.lastTick=Date.now();closeModal();replan();save();render();window.scrollTo({top:0});toast('新しい航路を開始しました','success');return;
+ }
+}
+async function onChange(e){
+ if(e.target.id==='import-save'&&e.target.files?.length){
+   try{const raw=JSON.parse(await e.target.files[0].text()),data=raw?.save||raw;
+     if(!data||data.version!==C.SAVE_VERSION)throw new Error('対応していないセーブ形式です');
+     if(!window.confirm('現在のセーブデータを読み込んだデータで置き換えますか？'))return;
+     s=C.sanitize(data);s.lastTick=Date.now();replan();save();render();toast('セーブデータを読み込みました','success');
+   }catch(err){toast('読み込み失敗：'+err.message,'error');}
+   e.target.value='';
+ }
+}
+function onKey(e){
+ if(e.key==='Escape'&&modal){closeModal();return;}
+ if(modal||e.ctrlKey||e.metaKey||e.altKey||e.target.closest('input,textarea,select'))return;
+ if(['1','2','3','4'].includes(e.key)){navigate(menu[Number(e.key)-1][0]);}
+}
+start();
+})();
+
+</script>
+</body>
+</html>
