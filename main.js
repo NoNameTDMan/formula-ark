@@ -7,6 +7,10 @@ const UI_KEY='formula-ark-ui-v1';
 let s, currentPlan, selection={formula:'helios',slot:0}, modal=null, margin=null;
 let dirty=false, lastRender=0, resetting=false;
 let soundEnabled=false, audioContext=null;
+const GUIDE_KEY='formula-ark-guide-v1';
+let guideStep=0, guideVisible=true;
+try {const g=JSON.parse(localStorage.getItem(GUIDE_KEY)||'{}');guideStep=Math.max(0,Math.min(5,Number(g.step)||0));guideVisible=g.visible!==false;}catch(e){}
+function saveGuide(){try{localStorage.setItem(GUIDE_KEY,JSON.stringify({step:guideStep,visible:guideVisible}));}catch(e){}}
 const qs=(sel)=>document.querySelector(sel);
 const money=(n)=>C.format(n);
 const num=(n)=>Number(n).toLocaleString('ja-JP');
@@ -94,11 +98,30 @@ function tick(){
   if(time)time.textContent=`次の生産まで ${((C.CYCLE_MS-(now-s.lastTick))/1000).toFixed(1)}s`;
 }
 function navigate(tab){s.activeTab=tab;save();render();window.scrollTo({top:0,behavior:'instant'});}
+function guidePanel(){
+ const steps=[
+  ['何を目指す？','4秒ごとに「光量 L」と「知識 D」を生産します。契約の2つの目標を両方満たすのが最初のゴールです。','command','契約を見る'],
+  ['何が変数？','xᵢ は生産式 i を1周期に何回稼働するかを表す整数変数です。回数そのものはソルバが決定します。','command','稼働計画を見る'],
+  ['制約を編集しよう','「式の設計」で「光子圧縮」を選び、最低稼働を3にします。これは xᵢ ≥ 3 という制約を追加する操作です。','formulas','式の設計へ'],
+  ['最適解を確認','管制室に戻り、光量・知識と各式の稼働回数を確認。下限を追加すると、ほかの式への配分も変わります。','command','最適解を見る'],
+  ['報酬と研究','契約の生産条件を達成したら報酬を受け取ります。「研究・試験」で資源上限や式の性能を強化できます。','lab','研究・試験へ'],
+  ['紙の定式化と照合','目的関数は max Z = L + λD、制約は物質・電力の上限と各式の稼働範囲です。下の「数理モデルを見る」で現在の係数を確認できます。','command','数理モデルを見る']
+ ];
+ if(!guideVisible)return `<div class="guide-reopen"><button class="btn sm soft" data-act="guide-restart">${icon('info')} はじめてガイドを開く</button><button class="btn sm" data-act="model-toggle">${icon('sigma')} 数理モデルを見る</button></div>`;
+ const a=steps[guideStep];return `<section class="guide-panel" aria-label="操作チュートリアル"><div class="guide-top"><span class="guide-kicker">GUIDED TUTORIAL · ${guideStep+1} / ${steps.length}</span><button class="btn sm" data-act="guide-hide" aria-label="チュートリアルを閉じる">× 閉じる</button></div><div class="guide-dots">${steps.map((_,i)=>`<span class="${i<=guideStep?'active':''}"></span>`).join('')}</div><h2>${a[0]}</h2><p>${a[1]}</p>${guideStep===2?`<p class="guide-status">現在の光子圧縮の最低稼働：<strong>${s.minRuns.helios||0}</strong> / 3 ${s.minRuns.helios>=3?'✓ 達成':'（「＋」を押してください）'}</p>`:''}<div class="guide-actions"><button class="btn sm soft" data-act="guide-back" ${guideStep===0?'disabled':''}>戻る</button><button class="btn sm" data-act="guide-go" data-id="${a[2]}">${a[3]}</button><button class="btn sm primary" data-act="guide-next">${guideStep===steps.length-1?'完了':'次へ'} ${icon('arrow')}</button></div></section>`;
+}
+function modelPanel(){
+ const b=C.budgets(s),fs=C.compileAll(s),lambda=s.weight;
+ const terms=(key)=>fs.map(f=>`${f[key]}x${f.id===fs[0].id?'₁':'₍'+(fs.indexOf(f)+1)+'₎'}`).join(' + ');
+ const rows=fs.map((f,i)=>`<tr><td>${i+1}：${esc(f.name)}</td><td>${f.m}</td><td>${f.e}</td><td>${f.l}</td><td>${f.d}</td><td>${f.bL}</td><td>${f.bD}</td><td>${f.min}〜${f.cap}</td><td>${currentPlan.counts[f.id]||0}</td></tr>`).join('');
+ return `<section class="model-panel"><div class="flex between center gap8"><h2>現在の数理最適化モデル</h2><button class="btn sm" data-act="model-toggle">閉じる</button></div><p>変数 xᵢ：式 i の整数稼働回数、yᵢ：式 i を1回以上稼働するなら1（それ以外0）</p><div class="model-math">最大化 Z = L + ${lambda}D<br>L = Σ(ℓᵢxᵢ + aᵢyᵢ)、D = Σ(dᵢxᵢ + bᵢyᵢ)<br>Σmᵢxᵢ ≤ ${b.m} （物質）<br>Σeᵢxᵢ ≤ ${b.e} （電力）<br>kᵢ ≤ xᵢ ≤ uᵢ、xᵢ は非負整数<br>yᵢ ≤ xᵢ ≤ uᵢyᵢ、yᵢ ∈ {0,1}</div><p class="caption">定数項は稼働回数に関係なく、1回以上稼働したときだけ発生します。これは起動変数 yᵢ に対応します。</p><div class="model-table-wrap"><table class="model-table"><thead><tr><th>式 i</th><th>mᵢ</th><th>eᵢ</th><th>ℓᵢ</th><th>dᵢ</th><th>aᵢ</th><th>bᵢ</th><th>kᵢ〜uᵢ</th><th>最適 xᵢ</th></tr></thead><tbody>${rows}</tbody></table></div><p class="caption">係数は現在装着中の演算子・研究を反映。右端がソルバの計算結果です。</p></section>`;
+}
+let modelVisible=false;
 function render(keepScroll=false){
   lastRender=Date.now();const y=keepScroll?window.scrollY:0;
   qs('#side-nav').innerHTML=`<p class="side-caption">NAVIGATION</p>${menu.map(([id,name,glyph])=>`<button class="side-link ${s.activeTab===id?'active':''}" data-act="tab" data-id="${id}" aria-current="${s.activeTab===id?'page':'false'}">${icon(glyph)}<span>${name}</span></button>`).join('')}<div class="side-footer">ENGINE : EXACT INTEGER DP<br>NETWORK : OFFLINE READY<br>BUILD 0.9.0 / LOCAL</div>`;
   qs('#bottom-nav').innerHTML=menu.map(([id,name,glyph])=>`<button class="bottom-link ${s.activeTab===id?'active':''}" data-act="tab" data-id="${id}" aria-label="${name}" aria-current="${s.activeTab===id?'page':'false'}">${icon(glyph)}<span>${name}</span></button>`).join('');
-  qs('#view').innerHTML=(s.activeTab==='command'?renderCommand():s.activeTab==='formulas'?renderFormulas():s.activeTab==='lab'?renderLab():renderArchive())+'<div class="footer-note">FORMULA / ARK · 独立したオフラインゲーム · 数式と制約が、次の航路を決める。</div>';
+  qs('#view').innerHTML=guidePanel()+(modelVisible?modelPanel():'')+(s.activeTab==='command'?renderCommand():s.activeTab==='formulas'?renderFormulas():s.activeTab==='lab'?renderLab():renderArchive())+'<div class="footer-note">FORMULA / ARK · 独立したオフラインゲーム · 数式と制約が、次の航路を決める。</div>';
   if(keepScroll&&Math.abs(window.scrollY-y)>2)window.scrollTo({top:y,behavior:'instant'});
 }
 function pageHeading(k,title,desc,aside=''){return `<div class="page-head"><div><div class="eyebrow">${k}</div><h1>${title}</h1><p>${desc}</p></div><div class="head-aside">${aside}</div></div>`;}
@@ -120,7 +143,6 @@ function renderCommand(){
   <div class="panel" style="padding:14px 20px;margin-top:13px"><div class="flex between center" style="margin-bottom:9px"><div class="flex center gap8"><span class="opt-badge">${solved?'OPTIMAL SOLUTION':'INFEASIBLE'}</span><span id="tick-countdown" class="muted tiny">次の生産まで 4.0s</span></div><button data-act="pause" class="mini-action">${s.paused?'▶ 再開':'Ⅱ 一時停止'}</button></div><div class="tick-progress"><div id="tick-fill"></div></div></div>
   ${section('02','今の契約と目標')}${mission}
   <div class="split" style="margin-top:16px"><div>${renderPlanner(p,b,helper)}</div><div>${renderOptimizer(p)}</div></div>
-  ${s.tutorial<2?`<div style="margin-top:16px" class="explanation"><div class="title">初めての航路ガイド / ${s.tutorial+1} of 2</div>${s.tutorial===0?'ソルバは「光量＋重み×知識」が最大になる稼働回数を自動計算します。しかし契約では両方が必要です。まず「式の設計」で光子圧縮の最低稼働回数を 3 に設定しましょう。':'式に演算子を装着すると、単位生産量や資源消費を変えられます。契約達成後に獲得できる演算子も確認しましょう。'}<div class="tutorial-cta"><button class="btn sm primary" data-act="tab" data-id="formulas">式の設計へ ${icon('arrow')}</button><button class="btn sm" data-act="tutorial-next">${s.tutorial===0?'理解した':'ガイドを閉じる'}</button></div></div>`:''}
   ${section('03','生産履歴','直近32周期')}${renderHistory()}`;
 }
 function renderPlanner(p,b,helper){
@@ -211,7 +233,12 @@ function onClick(e){
    const r=C.claimTrial(s,id);if(!r.ok){toast(r.reason,'error');return;}
    checkAchievements();save();render(true);playSound('win');toast('最適化試験合格！ 光量と知識を獲得','success');return;
  }
- if(act==='tutorial-next'){s.tutorial=Math.min(2,s.tutorial+1);save();render(true);return;}
+ if(act==='guide-hide'){guideVisible=false;saveGuide();render(true);return;}
+ if(act==='guide-restart'){guideVisible=true;guideStep=0;saveGuide();render();return;}
+ if(act==='guide-back'){guideStep=Math.max(0,guideStep-1);saveGuide();render(true);return;}
+ if(act==='guide-next'){if(guideStep===2&&(s.minRuns.helios||0)<3){toast('まず光子圧縮の最低稼働を3に設定してください','error');navigate('formulas');return;}if(guideStep===5){guideVisible=false;}else guideStep++;saveGuide();render(true);return;}
+ if(act==='guide-go'){if(guideStep===5){modelVisible=true;navigate('command');}else navigate(id);return;}
+ if(act==='model-toggle'){modelVisible=!modelVisible;render(true);return;}
  if(act==='sound'){
    soundEnabled=!soundEnabled;try{localStorage.setItem(UI_KEY,JSON.stringify({sound:soundEnabled}));}catch(e){}
    if(soundEnabled)playSound('build');render(true);toast(soundEnabled?'効果音を有効にしました':'効果音を無効にしました');return;
