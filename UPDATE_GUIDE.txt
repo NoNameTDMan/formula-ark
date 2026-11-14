@@ -1,0 +1,8 @@
+FORMULA / ARK v1.0.1 完全版
+
+独立リポジトリのGitHub Pages公開フォルダに、このZIPの内容をすべて配置してください。
+古いsw.jsを含め上書きしてください。My Toolbox側は変更しないでください。
+GitHub ActionsのPagesデプロイ完了後、まずSafariで公開URLを確認してください。
+画面上部「BETA 1.0」、下部「v1.0 prototype」が新画面の目印です。
+既存v0.9のセーブデータは新v1と別キーで保存され、削除しません。
+古い画面が残る場合はSafariのWebサイトデータ/ホーム画面PWAのキャッシュを確認してください。
